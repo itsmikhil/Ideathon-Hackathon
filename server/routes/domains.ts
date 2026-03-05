@@ -44,20 +44,27 @@ router.get('/:id/topics', authenticate, async (req: AuthRequest, res) => {
 
     // Fetch VIT curriculum subjects (seeded, managed by admin)
     const vitResult = await query(
-      `SELECT * FROM ai_generated_topics WHERE domain_id = $1 AND source IN ('vit','both') ORDER BY title`,
-      [id]
+      `SELECT t.*, EXISTS(SELECT 1 FROM topic_demand td WHERE td.topic_id = t.id AND td.student_id = $2) as demanded
+       FROM ai_generated_topics t 
+       WHERE t.domain_id = $1 AND t.source IN ('vit','both') 
+       ORDER BY title`,
+      [id, req.user.user_id]
     );
 
     // Fetch AI-generated suggestions (max 3)
     let aiResult = await query(
-      `SELECT * FROM ai_generated_topics WHERE domain_id = $1 AND source = 'ai' ORDER BY created_at DESC LIMIT 3`,
-      [id]
+      `SELECT t.*, EXISTS(SELECT 1 FROM topic_demand td WHERE td.topic_id = t.id AND td.student_id = $2) as demanded
+       FROM ai_generated_topics t 
+       WHERE t.domain_id = $1 AND t.source = 'ai' 
+       ORDER BY created_at DESC LIMIT 3`,
+      [id, req.user.user_id]
     );
 
     // If no AI topics yet, generate them via Gemini (only insert if none exist)
     if (aiResult.rows.length === 0) {
       const aiTopics = await generateTopics(domain.id, domain.name, domain.slug);
-      aiResult = { rows: aiTopics.slice(0, 3) } as any;
+      // Ensure these have a 'demanded' flag too for consistency (fresh generated = false)
+      aiResult = { rows: aiTopics.slice(0, 3).map(t => ({ ...t, demanded: false })) } as any;
     }
 
     res.json({

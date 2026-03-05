@@ -35,6 +35,7 @@ function TopicCard({
 }: {
   topic: Topic;
   onDemand: (id: string, curr: boolean) => void | Promise<void>;
+  key?: React.Key;
 }) {
   const [showResources, setShowResources] = useState(false);
   const [resources, setResources] = useState<Resource[]>([]);
@@ -71,11 +72,11 @@ function TopicCard({
               <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                 <CheckCircle className="w-3 h-3 mr-1" /> Available at VIT
               </span>
-            ) : topic.source !== 'ai' ? (
+            ) : (
               <span className="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-500">
                 <XCircle className="w-3 h-3 mr-1" /> Not currently offered
               </span>
-            ) : null}
+            )}
           </h3>
           {topic.vit_subject_name && (
             <p className="text-xs text-indigo-600 mt-0.5">VIT Subject: {topic.vit_subject_name}</p>
@@ -90,16 +91,26 @@ function TopicCard({
         </span>
       </div>
       <div className="border-t border-gray-100 px-4 py-3 sm:px-6 bg-gray-50 flex flex-wrap gap-3 items-center">
-        {topic.source !== 'ai' && !topic.is_vit_available && (
-          <label className="inline-flex items-center cursor-pointer">
-            <input
-              type="checkbox"
-              className="form-checkbox h-4 w-4 text-indigo-600"
-              checked={topic.demanded || false}
-              onChange={() => onDemand(topic.id, topic.demanded || false)}
-            />
-            <span className="ml-2 text-sm text-gray-700 font-medium">I want this at VIT</span>
-          </label>
+        {!topic.is_vit_available && (
+          <button
+            onClick={() => onDemand(topic.id, topic.demanded || false)}
+            className={`inline-flex items-center px-3 py-1.5 border text-xs font-medium rounded transition-colors ${topic.demanded
+              ? 'bg-purple-100 border-purple-300 text-purple-800 hover:bg-purple-200'
+              : 'bg-white border-gray-300 text-gray-700 hover:bg-purple-50 hover:border-purple-400 hover:text-purple-700'
+              }`}
+          >
+            {topic.demanded ? (
+              <>
+                <CheckCircle className="w-4 h-4 mr-1.5" />
+                Requested for VIT
+              </>
+            ) : (
+              <>
+                <Sparkles className="w-4 h-4 mr-1.5" />
+                I want this in VIT
+              </>
+            )}
+          </button>
         )}
         <button
           onClick={handleResourceClick}

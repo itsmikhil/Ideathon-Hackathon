@@ -29,7 +29,7 @@ export default function AdminDashboard() {
   return (
     <div className="py-8 space-y-8">
       <h1 className="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
-      
+
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
         <div className="bg-white shadow sm:rounded-lg border border-gray-200 p-6">
           <h3 className="text-lg leading-6 font-medium text-gray-900 mb-4 flex items-center">
@@ -63,20 +63,47 @@ export default function AdminDashboard() {
 
         <div className="bg-white shadow sm:rounded-lg border border-gray-200 p-6">
           <h3 className="text-lg leading-6 font-medium text-gray-900 mb-4 flex items-center">
-            <RefreshCw className="h-5 w-5 mr-2 text-indigo-600" />
+            <RefreshCw className="h-5 w-5 mr-2 text-purple-600" />
             Topic Demand (Not in VIT)
           </h3>
-          <ul className="divide-y divide-gray-200">
-            {topicDemand.map(topic => (
-              <li key={topic.title} className="py-4 flex flex-col">
-                <div className="flex justify-between">
-                  <span className="text-sm font-medium text-gray-900">{topic.title}</span>
-                  <span className="text-sm text-gray-500">{topic.demand_count} votes</span>
-                </div>
-                <span className="text-xs text-gray-400 mt-1">{topic.domain_name}</span>
-              </li>
-            ))}
-          </ul>
+          {topicDemand.length === 0 ? (
+            <p className="text-sm text-gray-500 italic py-4">No topic demands recorded yet.</p>
+          ) : (
+            <ul className="divide-y divide-gray-100">
+              {topicDemand.map((topic, idx) => {
+                // Calculate percentage relative to highest demanded topic for the progress bar
+                const maxDemand = Math.max(...topicDemand.map(t => Number(t.demand_count) || 0));
+                const currentDemand = Number(topic.demand_count) || 0;
+                const percentage = maxDemand > 0 ? (currentDemand / maxDemand) * 100 : 0;
+
+                return (
+                  <li key={`${topic.title}-${idx}`} className="py-4 flex flex-col gap-2">
+                    <div className="flex justify-between items-start">
+                      <div>
+                        <span className="text-sm font-medium text-gray-900">{topic.title}</span>
+                        <div className="mt-1">
+                          <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-purple-50 text-purple-700 border border-purple-100">
+                            {topic.domain_name}
+                          </span>
+                        </div>
+                      </div>
+                      <div className="flex items-center bg-gray-50 px-2 py-1 rounded border border-gray-100">
+                        <span className="text-sm font-bold text-purple-700">{currentDemand}</span>
+                        <span className="text-xs text-gray-500 ml-1">votes</span>
+                      </div>
+                    </div>
+                    {/* Progress Bar */}
+                    <div className="w-full bg-gray-100 rounded-full h-1.5 mt-1 overflow-hidden">
+                      <div
+                        className="bg-purple-500 h-1.5 rounded-full transition-all duration-500 ease-out"
+                        style={{ width: `${percentage}%` }}
+                      ></div>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          )}
         </div>
 
         <div className="bg-white shadow sm:rounded-lg border border-gray-200 p-6">
