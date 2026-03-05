@@ -31,7 +31,7 @@ interface Doubt {
   subject_tag: string;
 }
 
-function BlogCard({ blog }: { blog: BlogPost }) {
+function BlogCard({ blog, key }: { blog: BlogPost; key?: React.Key }) {
   const [open, setOpen] = useState(false);
   const [comments, setComments] = useState<Comment[]>([]);
   const [replyText, setReplyText] = useState('');
@@ -83,51 +83,51 @@ function BlogCard({ blog }: { blog: BlogPost }) {
   };
 
   return (
-    <div className="bg-white/80 backdrop-blur-sm shadow-sm overflow-hidden rounded-3xl border border-slate-200/60 transition-all hover:shadow-md">
+    <div className="bg-white/95 backdrop-blur-sm shadow-sm overflow-hidden rounded-3xl border border-ink-200/60 transition-all hover:shadow-md">
       <div className="p-6 sm:p-8">
-        <h3 className="text-xl font-extrabold text-slate-800">{blog.title}</h3>
-        <p className="mt-2 text-sm font-medium text-slate-500 flex items-center gap-2">
-          By <span className="text-slate-700 font-bold">{blog.teacher_name}</span> &bull; {new Date(blog.published_at).toLocaleDateString()}
+        <h3 className="text-xl font-extrabold text-ink-900">{blog.title}</h3>
+        <p className="mt-2 text-sm font-medium text-ink-500 flex items-center gap-2">
+          By <span className="text-ink-700 font-bold">{blog.teacher_name}</span> &bull; {new Date(blog.published_at).toLocaleDateString()}
         </p>
-        <div className="mt-5 text-slate-600 whitespace-pre-wrap leading-relaxed">{blog.content}</div>
-        <div className="mt-6 pt-4 flex items-center gap-3 text-sm font-semibold text-slate-500 border-t border-slate-100/50">
+        <div className="mt-5 text-ink-600 whitespace-pre-wrap leading-relaxed">{blog.content}</div>
+        <div className="mt-6 pt-4 flex items-center gap-3 text-sm font-semibold text-ink-500 border-t border-ink-100/50">
           <button
             onClick={handleLike}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-slate-400 hover:bg-amber-50 hover:text-amber-500 transition-colors active:scale-95"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-success-50 hover:text-success-600 transition-colors active:scale-95"
           >
             <ThumbsUp className="w-4 h-4" /> {upvotes}
           </button>
           <button
             onClick={handleToggle}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors active:scale-95 ${open ? 'bg-amber-50 text-amber-500' : 'text-slate-400 hover:bg-amber-50 hover:text-amber-500'}`}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors active:scale-95 ${open ? 'bg-accent-50 text-accent-600' : 'hover:bg-accent-50 hover:text-accent-600'}`}
           >
             <MessageSquare className="w-4 h-4" />
             Reply
             {open ? <ChevronUp className="w-4 h-4 ml-1" /> : <ChevronDown className="w-4 h-4 ml-1" />}
           </button>
-          <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-slate-400 hover:bg-red-50 hover:text-red-500 ml-auto transition-colors">
+          <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-error-50 hover:text-error-600 ml-auto transition-colors">
             <Flag className="w-4 h-4" /> Flag
           </button>
         </div>
       </div>
 
       {open && (
-        <div className="bg-slate-50/50 px-6 sm:px-8 py-6 space-y-6">
+        <div className="bg-ink-50/50 px-6 sm:px-8 py-6 space-y-6">
           {loading ? (
-            <div className="flex justify-center"><div className="w-5 h-5 border-2 border-amber-500 border-t-transparent rounded-full animate-spin"></div></div>
+            <div className="flex justify-center"><div className="w-5 h-5 border-2 border-accent-500 border-t-transparent rounded-full animate-spin"></div></div>
           ) : comments.length === 0 ? (
-            <p className="text-sm text-slate-400 italic text-center">No replies yet. Be the first!</p>
+            <p className="text-sm text-ink-400 italic text-center">No replies yet. Be the first!</p>
           ) : (
             <div className="space-y-4">
               {comments.map(c => (
                 <div key={c.id} className="flex gap-4">
-                  <div className="shrink-0 w-10 h-10 rounded-2xl bg-slate-100 flex items-center justify-center text-sm font-extrabold text-slate-700 shadow-sm border border-slate-200/50">
+                  <div className="shrink-0 w-10 h-10 rounded-2xl bg-accent-100 flex items-center justify-center text-sm font-extrabold text-accent-700 shadow-sm border border-accent-200/50">
                     {c.author_name[0]?.toUpperCase()}
                   </div>
-                  <div className="bg-white rounded-2xl rounded-tl-sm shadow-sm border border-slate-200/60 px-4 py-3 flex-1 relative">
-                    <p className="text-xs font-bold text-slate-800">{c.author_name}</p>
-                    <p className="text-sm text-slate-600 mt-1">{c.content}</p>
-                    <p className="text-[10px] uppercase tracking-wider font-bold text-slate-400 mt-2">{new Date(c.created_at).toLocaleString()}</p>
+                  <div className="bg-white rounded-2xl rounded-tl-sm shadow-sm border border-ink-200/60 px-4 py-3 flex-1 relative">
+                    <p className="text-xs font-bold text-ink-900">{c.author_name}</p>
+                    <p className="text-sm text-ink-600 mt-1">{c.content}</p>
+                    <p className="text-[10px] uppercase tracking-wider font-bold text-ink-400 mt-2">{new Date(c.created_at).toLocaleString()}</p>
                   </div>
                 </div>
               ))}
@@ -141,12 +141,12 @@ function BlogCard({ blog }: { blog: BlogPost }) {
               value={replyText}
               onChange={e => setReplyText(e.target.value)}
               placeholder="Write a reply…"
-              className="flex-1 border border-slate-200 bg-white rounded-2xl px-5 py-3.5 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-colors"
+              className="flex-1 border border-ink-200 bg-white rounded-2xl px-5 py-3.5 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-accent-500/20 focus:border-accent-500 transition-colors text-ink-900 placeholder:text-ink-400"
             />
             <button
               type="submit"
               disabled={submitting || !replyText.trim()}
-              className="inline-flex items-center justify-center w-12 h-12 shrink-0 border border-transparent rounded-2xl text-slate-900 bg-amber-500 hover:bg-amber-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all active:scale-95 shadow-md"
+              className="inline-flex items-center justify-center w-12 h-12 shrink-0 border border-transparent rounded-2xl text-white bg-accent-600 hover:bg-accent-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all active:scale-95 shadow-sm shadow-accent-500/30"
             >
               <Send className="w-5 h-5 ml-[-2px]" />
             </button>
@@ -157,7 +157,7 @@ function BlogCard({ blog }: { blog: BlogPost }) {
   );
 }
 
-function DoubtCard({ doubt }: { doubt: Doubt }) {
+function DoubtCard({ doubt, key }: { doubt: Doubt; key?: React.Key }) {
   const [open, setOpen] = useState(false);
   const [replyText, setReplyText] = useState('');
   const [submitting, setSubmitting] = useState(false);
@@ -189,26 +189,26 @@ function DoubtCard({ doubt }: { doubt: Doubt }) {
   };
 
   return (
-    <div className="bg-white/80 backdrop-blur-sm shadow-sm overflow-hidden rounded-3xl border border-slate-200/60 transition-all hover:shadow-md">
+    <div className="bg-white/95 backdrop-blur-sm shadow-sm overflow-hidden rounded-3xl border border-ink-200/60 transition-all hover:shadow-md">
       <div className="p-6 sm:p-8">
         <div className="flex justify-between items-start mb-2">
-          <h3 className="text-xl font-extrabold text-slate-800">{doubt.title}</h3>
-          <span className="shrink-0 inline-flex items-center px-3 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider bg-slate-100 text-slate-700 border border-slate-200">
+          <h3 className="text-xl font-extrabold text-ink-900">{doubt.title}</h3>
+          <span className="shrink-0 inline-flex items-center px-3 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider bg-brand-50 text-brand-700 border border-brand-100">
             {doubt.subject_tag}
           </span>
         </div>
-        <p className="mt-1 text-sm font-medium text-slate-500 flex items-center gap-2">
-          By <span className="text-slate-700 font-bold">{doubt.student_name}</span> &bull; {new Date(doubt.created_at).toLocaleDateString()}
+        <p className="mt-1 text-sm font-medium text-ink-500 flex items-center gap-2">
+          By <span className="text-ink-700 font-bold">{doubt.student_name}</span> &bull; {new Date(doubt.created_at).toLocaleDateString()}
         </p>
-        <div className="mt-4 text-slate-600 leading-relaxed">{doubt.content}</div>
-        <div className="mt-6 pt-4 flex items-center justify-between text-sm font-semibold text-slate-500 border-t border-slate-100/50">
+        <div className="mt-4 text-ink-600 leading-relaxed">{doubt.content}</div>
+        <div className="mt-6 pt-4 flex items-center justify-between text-sm font-semibold text-ink-500 border-t border-ink-100/50">
           <div className="flex gap-3">
-            <button onClick={handleUpvote} className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-slate-400 hover:bg-amber-50 hover:text-amber-500 transition-colors active:scale-95">
+            <button onClick={handleUpvote} className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-success-50 hover:text-success-600 transition-colors active:scale-95">
               <ThumbsUp className="w-4 h-4" /> {upvotes}
             </button>
             <button
               onClick={() => setOpen(!open)}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors active:scale-95 ${open ? 'bg-amber-50 text-amber-500' : 'text-slate-400 hover:bg-amber-50 hover:text-amber-500'}`}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors active:scale-95 ${open ? 'bg-accent-50 text-accent-600' : 'hover:bg-accent-50 hover:text-accent-600'}`}
             >
               <MessageSquare className="w-4 h-4" />
               Answers
@@ -219,19 +219,19 @@ function DoubtCard({ doubt }: { doubt: Doubt }) {
       </div>
 
       {open && (
-        <div className="bg-slate-50/50 px-6 sm:px-8 py-6 space-y-6">
+        <div className="bg-ink-50/50 px-6 sm:px-8 py-6 space-y-6">
           {replies.length === 0 ? (
-            <p className="text-sm text-slate-400 italic text-center">No answers yet.</p>
+            <p className="text-sm text-ink-400 italic text-center">No answers yet.</p>
           ) : (
             <div className="space-y-4">
               {replies.map(r => (
                 <div key={r.id} className="flex gap-4">
-                  <div className="shrink-0 w-10 h-10 rounded-2xl bg-slate-100 flex items-center justify-center text-sm font-extrabold text-slate-700 shadow-sm border border-slate-200/50">
+                  <div className="shrink-0 w-10 h-10 rounded-2xl bg-brand-100 flex items-center justify-center text-sm font-extrabold text-brand-700 shadow-sm border border-brand-200/50">
                     {r.author_name[0]?.toUpperCase()}
                   </div>
-                  <div className="bg-white rounded-2xl rounded-tl-sm shadow-sm border border-slate-200/60 px-4 py-3 flex-1 relative">
-                    <p className="text-xs font-bold text-slate-800">{r.author_name}</p>
-                    <p className="text-sm text-slate-600 mt-1">{r.content}</p>
+                  <div className="bg-white rounded-2xl rounded-tl-sm shadow-sm border border-ink-200/60 px-4 py-3 flex-1 relative">
+                    <p className="text-xs font-bold text-ink-900">{r.author_name}</p>
+                    <p className="text-sm text-ink-600 mt-1">{r.content}</p>
                   </div>
                 </div>
               ))}
@@ -243,12 +243,12 @@ function DoubtCard({ doubt }: { doubt: Doubt }) {
               value={replyText}
               onChange={e => setReplyText(e.target.value)}
               placeholder="Write an answer…"
-              className="flex-1 border border-slate-200 bg-white rounded-2xl px-5 py-3.5 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-colors"
+              className="flex-1 border border-ink-200 bg-white rounded-2xl px-5 py-3.5 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-accent-500/20 focus:border-accent-500 transition-colors text-ink-900 placeholder:text-ink-400"
             />
             <button
               type="submit"
               disabled={submitting || !replyText.trim()}
-              className="inline-flex items-center justify-center w-12 h-12 shrink-0 border border-transparent rounded-2xl text-slate-900 bg-amber-500 hover:bg-amber-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all active:scale-95 shadow-md"
+              className="inline-flex items-center justify-center w-12 h-12 shrink-0 border border-transparent rounded-2xl text-white bg-accent-600 hover:bg-accent-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all active:scale-95 shadow-sm shadow-accent-500/30"
             >
               <Send className="w-5 h-5 ml-[-2px]" />
             </button>
@@ -296,13 +296,13 @@ export default function Forum() {
   return (
     <div className="py-12 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8 gap-4">
-        <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight">Community Forum</h1>
-        <div className="p-1.5 bg-slate-100 rounded-2xl flex items-center shadow-inner self-start sm:self-auto">
+        <h1 className="text-4xl font-extrabold text-ink-900 tracking-tight">Community Forum</h1>
+        <div className="p-1.5 bg-ink-100 rounded-2xl flex items-center shadow-inner self-start sm:self-auto">
           <button
             onClick={() => setActiveTab('blogs')}
             className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${activeTab === 'blogs'
-              ? 'bg-slate-900 text-white shadow-sm'
-              : 'text-slate-500 hover:text-slate-700'
+              ? 'bg-white text-accent-600 shadow-sm shadow-ink-200/50'
+              : 'text-ink-500 hover:text-ink-700'
               }`}
           >
             Teacher Blogs
@@ -310,8 +310,8 @@ export default function Forum() {
           <button
             onClick={() => setActiveTab('doubts')}
             className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${activeTab === 'doubts'
-              ? 'bg-slate-900 text-white shadow-sm'
-              : 'text-slate-500 hover:text-slate-700'
+              ? 'bg-white text-accent-600 shadow-sm shadow-ink-200/50'
+              : 'text-ink-500 hover:text-ink-700'
               }`}
           >
             Student Doubts
@@ -321,7 +321,7 @@ export default function Forum() {
 
       {activeTab === 'blogs' && (
         <div className="space-y-6">
-          {blogs.length === 0 && <p className="text-slate-500 italic text-center py-10 bg-white/50 rounded-3xl border border-slate-200/50">No blog posts yet.</p>}
+          {blogs.length === 0 && <p className="text-ink-500 italic text-center py-10 bg-white/50 rounded-3xl border border-ink-200/50">No blog posts yet.</p>}
           {blogs.map(blog => (
             <BlogCard key={blog.id} blog={blog} />
           ))}
@@ -333,10 +333,10 @@ export default function Forum() {
           {user?.role === 'student' && (
             <form
               onSubmit={handleDoubtSubmit}
-              className="bg-white/80 backdrop-blur-sm shadow-sm rounded-3xl border border-slate-200/60 p-6 sm:p-8"
+              className="bg-white/95 backdrop-blur-sm shadow-sm rounded-3xl border border-ink-200/60 p-6 sm:p-8"
             >
-              <h3 className="text-xl font-extrabold text-slate-800 mb-6 flex items-center">
-                <div className="p-2 bg-amber-50 text-amber-500 rounded-xl mr-3 border border-amber-200">
+              <h3 className="text-xl font-extrabold text-ink-900 mb-6 flex items-center">
+                <div className="p-2 bg-accent-50 text-accent-600 rounded-xl mr-3">
                   <MessageSquare className="w-5 h-5" />
                 </div>
                 Ask a Doubt
@@ -346,7 +346,7 @@ export default function Forum() {
                   type="text"
                   placeholder="What is your doubt about?"
                   required
-                  className="block w-full border border-slate-200 rounded-2xl px-5 py-4 text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-colors bg-white hover:bg-slate-50/50"
+                  className="block w-full border border-ink-200 rounded-2xl px-5 py-4 text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-accent-500/20 focus:border-accent-500 transition-colors bg-ink-50/50 text-ink-900 placeholder:text-ink-400"
                   value={newDoubt.title}
                   onChange={e => setNewDoubt({ ...newDoubt, title: e.target.value })}
                 />
@@ -354,13 +354,13 @@ export default function Forum() {
                   placeholder="Describe your doubt in detail..."
                   required
                   rows={4}
-                  className="block w-full border border-slate-200 rounded-2xl px-5 py-4 text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-colors bg-white hover:bg-slate-50/50 resize-y"
+                  className="block w-full border border-ink-200 rounded-2xl px-5 py-4 text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-accent-500/20 focus:border-accent-500 transition-colors bg-ink-50/50 resize-y text-ink-900 placeholder:text-ink-400"
                   value={newDoubt.content}
                   onChange={e => setNewDoubt({ ...newDoubt, content: e.target.value })}
                 />
                 <select
                   required
-                  className="block w-full border border-slate-200 rounded-2xl px-5 py-4 text-sm font-semibold text-slate-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-colors bg-white hover:bg-slate-50/50 cursor-pointer"
+                  className="block w-full border border-ink-200 rounded-2xl px-5 py-4 text-sm font-semibold text-ink-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-accent-500/20 focus:border-accent-500 transition-colors bg-ink-50/50 cursor-pointer"
                   value={newDoubt.subject_tag}
                   onChange={e => setNewDoubt({ ...newDoubt, subject_tag: e.target.value })}
                 >
@@ -389,7 +389,7 @@ export default function Forum() {
                 <div className="pt-2">
                   <button
                     type="submit"
-                    className="w-full inline-flex justify-center items-center py-4 px-6 border border-transparent shadow-[0_4px_14px_0_rgba(245,158,11,0.39)] text-sm font-bold rounded-2xl text-slate-900 bg-amber-500 hover:bg-amber-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 transition-all active:scale-[0.98]"
+                    className="w-full inline-flex justify-center items-center py-4 px-6 border border-transparent shadow-[0_4px_14px_0_rgba(245,158,11,0.4)] text-sm font-bold rounded-2xl text-white bg-accent-600 hover:bg-accent-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent-500 transition-all active:scale-[0.98]"
                   >
                     Post Doubt
                   </button>
@@ -398,7 +398,7 @@ export default function Forum() {
             </form>
           )}
 
-          {doubts.length === 0 && <p className="text-slate-500 italic text-center py-10 bg-white/50 rounded-3xl border border-slate-200/50">No doubts posted yet.</p>}
+          {doubts.length === 0 && <p className="text-ink-500 italic text-center py-10 bg-white/50 rounded-3xl border border-ink-200/50">No doubts posted yet.</p>}
           {doubts.map(doubt => (
             <DoubtCard key={doubt.id} doubt={doubt} />
           ))}

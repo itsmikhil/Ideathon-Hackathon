@@ -37,19 +37,19 @@ export default function TeacherDashboard() {
   return (
     <div className="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
       <div className="mb-8">
-        <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight">Teacher Dashboard</h1>
+        <h1 className="text-4xl font-extrabold text-ink-900 tracking-tight">Teacher Dashboard</h1>
       </div>
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-3">
-        <div className="bg-slate-900 shadow-sm rounded-3xl border border-slate-800 p-6 sm:p-8 flex items-center transition-all hover:shadow-md">
-          <div className="flex-shrink-0 p-4 bg-amber-500/10 rounded-2xl">
-            <Award className="h-8 w-8 text-amber-500" aria-hidden="true" />
+        <div className="bg-white/95 backdrop-blur-sm shadow-sm rounded-3xl border border-ink-200/60 p-6 sm:p-8 flex items-center transition-all hover:shadow-md">
+          <div className="flex-shrink-0 p-4 bg-accent-50 rounded-2xl">
+            <Award className="h-8 w-8 text-accent-600" aria-hidden="true" />
           </div>
           <div className="ml-6 flex-1">
             <dl>
-              <dt className="text-sm font-bold text-slate-400 uppercase tracking-wider">Total Points</dt>
+              <dt className="text-sm font-bold text-ink-500 uppercase tracking-wider">Total Points</dt>
               <dd>
-                <div className="text-3xl font-extrabold text-amber-500 mt-1">{points.total}</div>
+                <div className="text-3xl font-extrabold text-accent-700 mt-1">{points.total}</div>
               </dd>
             </dl>
           </div>
@@ -57,9 +57,9 @@ export default function TeacherDashboard() {
       </div>
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8">
-        <div className="bg-white/80 backdrop-blur-sm shadow-sm rounded-3xl border border-slate-200/60 p-6 sm:p-8">
-          <h3 className="text-lg font-bold text-slate-900 mb-6 flex items-center">
-            <div className="p-2 bg-slate-100 text-amber-500 rounded-xl mr-3 border border-slate-200">
+        <div className="bg-white/95 backdrop-blur-sm shadow-sm rounded-3xl border border-ink-200/60 p-6 sm:p-8">
+          <h3 className="text-lg font-bold text-ink-900 mb-6 flex items-center">
+            <div className="p-2 bg-accent-50 text-accent-600 rounded-xl mr-3">
               <FileText className="h-5 w-5" />
             </div>
             Publish New Blog Post
@@ -69,7 +69,7 @@ export default function TeacherDashboard() {
               type="text"
               placeholder="Title"
               required
-              className="block w-full border border-slate-200 rounded-xl px-4 py-3 text-sm shadow-sm focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-colors bg-white hover:bg-slate-50/50"
+              className="block w-full border border-ink-200 rounded-xl px-4 py-3 text-sm shadow-sm focus:ring-2 focus:ring-accent-500/20 focus:border-accent-500 transition-colors bg-ink-50/50 text-ink-900 placeholder:text-ink-400"
               value={newBlog.title}
               onChange={e => setNewBlog({ ...newBlog, title: e.target.value })}
             />
@@ -77,14 +77,14 @@ export default function TeacherDashboard() {
               placeholder="Content (Markdown supported)"
               required
               rows={5}
-              className="block w-full border border-slate-200 rounded-xl px-4 py-3 text-sm shadow-sm focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-colors bg-white hover:bg-slate-50/50 resize-y"
+              className="block w-full border border-ink-200 rounded-xl px-4 py-3 text-sm shadow-sm focus:ring-2 focus:ring-accent-500/20 focus:border-accent-500 transition-colors bg-ink-50/50 resize-y text-ink-900 placeholder:text-ink-400"
               value={newBlog.content}
               onChange={e => setNewBlog({ ...newBlog, content: e.target.value })}
             />
             <div className="grid grid-cols-2 gap-4">
               <select
                 required
-                className="block w-full border border-slate-200 rounded-xl px-4 py-3 text-sm shadow-sm focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-colors bg-white hover:bg-slate-50/50 cursor-pointer"
+                className="block w-full border border-ink-200 rounded-xl px-4 py-3 text-sm shadow-sm focus:ring-2 focus:ring-accent-500/20 focus:border-accent-500 transition-colors bg-ink-50/50 cursor-pointer text-ink-900"
                 value={newBlog.subject_tag}
                 onChange={e => setNewBlog({ ...newBlog, subject_tag: e.target.value })}
               >
@@ -111,7 +111,7 @@ export default function TeacherDashboard() {
                 <option value="Object Oriented Programming">Object Oriented Programming</option>
               </select>
               <select
-                className="block w-full border border-slate-200 rounded-xl px-4 py-3 text-sm shadow-sm focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-colors bg-white hover:bg-slate-50/50 cursor-pointer"
+                className="block w-full border border-ink-200 rounded-xl px-4 py-3 text-sm shadow-sm focus:ring-2 focus:ring-accent-500/20 focus:border-accent-500 transition-colors bg-ink-50/50 cursor-pointer text-ink-900"
                 value={newBlog.difficulty_tag}
                 onChange={e => setNewBlog({ ...newBlog, difficulty_tag: e.target.value })}
               >
@@ -120,33 +120,33 @@ export default function TeacherDashboard() {
                 <option value="advanced">Advanced</option>
               </select>
             </div>
-            <button type="submit" className="w-full inline-flex justify-center items-center py-3 px-4 border border-transparent shadow-md text-sm font-bold rounded-xl text-slate-900 bg-amber-500 hover:bg-amber-600 transition-all duration-200 active:scale-[0.98] outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500">
+            <button type="submit" className="w-full inline-flex justify-center items-center py-3 px-4 border border-transparent shadow-sm shadow-accent-500/30 text-sm font-bold rounded-xl text-white bg-accent-600 hover:bg-accent-700 transition-all duration-200 active:scale-[0.98]">
               Publish Post
             </button>
           </form>
         </div>
 
-        <div className="bg-white/80 backdrop-blur-sm shadow-sm rounded-3xl border border-slate-200/60 p-6 sm:p-8">
-          <h3 className="text-lg font-bold text-slate-900 mb-6 flex items-center">
-            <div className="p-2 bg-slate-100 text-amber-500 rounded-xl mr-3 border border-slate-200">
+        <div className="bg-white/95 backdrop-blur-sm shadow-sm rounded-3xl border border-ink-200/60 p-6 sm:p-8">
+          <h3 className="text-lg font-bold text-ink-900 mb-6 flex items-center">
+            <div className="p-2 bg-success-50 text-success-600 rounded-xl mr-3">
               <Users className="h-5 w-5" />
             </div>
             Most Active Students
           </h3>
-          <ul className="divide-y divide-slate-100">
+          <ul className="divide-y divide-ink-100">
             {activeStudents.map(student => (
               <li key={student.id} className="py-4 flex items-center justify-between group">
                 <div className="flex flex-col">
-                  <span className="text-sm font-bold text-slate-800 group-hover:text-amber-500 transition-colors">{student.name}</span>
-                  <span className="text-xs font-semibold text-slate-500 mt-0.5">{student.interactions} interactions</span>
+                  <span className="text-sm font-bold text-ink-900 group-hover:text-accent-600 transition-colors">{student.name}</span>
+                  <span className="text-xs font-semibold text-ink-500 mt-0.5">{student.interactions} interactions</span>
                 </div>
-                <button className="inline-flex items-center px-4 py-2 border border-slate-200 text-xs font-bold rounded-xl text-slate-700 bg-white hover:bg-amber-50 hover:border-amber-200 hover:text-amber-600 transition-all duration-200 active:scale-95">
+                <button className="inline-flex items-center px-4 py-2 border border-transparent text-xs font-bold rounded-xl text-accent-700 bg-accent-50 hover:bg-accent-100 transition-colors active:scale-95">
                   Contact
                 </button>
               </li>
             ))}
             {activeStudents.length === 0 && (
-              <li className="py-8 text-sm text-slate-500 text-center italic border-2 border-dashed border-slate-200 rounded-2xl">No active students found yet.</li>
+              <li className="py-8 text-sm text-ink-500 text-center italic border-2 border-dashed border-ink-200 rounded-2xl">No active students found yet.</li>
             )}
           </ul>
         </div>
