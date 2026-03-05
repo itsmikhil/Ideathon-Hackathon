@@ -19,9 +19,9 @@ interface Topic {
 }
 
 const DIFFICULTY_COLORS: Record<string, string> = {
-    beginner: 'bg-emerald-50 text-emerald-700 border border-emerald-200/60',
-    intermediate: 'bg-amber-50 text-amber-700 border border-amber-200/60',
-    advanced: 'bg-rose-50 text-rose-700 border border-rose-200/60',
+    beginner: 'bg-green-100 text-green-700 border border-green-200',
+    intermediate: 'bg-amber-100 text-amber-700 border border-amber-200',
+    advanced: 'bg-red-100 text-red-700 border border-red-200',
 };
 
 export default function TopicManager() {
@@ -86,12 +86,12 @@ export default function TopicManager() {
                         <option key={d.id} value={d.id} className="font-medium">{d.name}</option>
                     ))}
                 </select>
-                <ChevronDown className="pointer-events-none absolute right-4 top-3 h-5 w-5 text-indigo-500" />
+                <ChevronDown className="pointer-events-none absolute right-4 top-3 h-5 w-5 text-amber-500" />
             </div>
 
             {loading ? (
                 <div className="flex items-center justify-center h-40">
-                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600" />
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-amber-500" />
                 </div>
             ) : (
                 <div className="space-y-8">
@@ -99,7 +99,7 @@ export default function TopicManager() {
                     <div>
                         <div className="flex items-center gap-3 mb-4">
                             <h2 className="text-2xl font-bold text-slate-800">VIT Curriculum Subjects</h2>
-                            <span className="px-2.5 py-1 rounded-lg bg-indigo-50 border border-indigo-100 text-indigo-700 text-xs font-bold uppercase tracking-widest">
+                            <span className="px-2.5 py-1 rounded-lg bg-slate-100 border border-slate-200 text-slate-700 text-xs font-bold uppercase tracking-widest">
                                 {vitTopics.length}
                             </span>
                         </div>
@@ -133,8 +133,8 @@ export default function TopicManager() {
                                                     disabled={saving === topic.id}
                                                     onClick={() => toggleAvailability(topic)}
                                                     className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all duration-200 active:scale-95 border ${topic.is_vit_available
-                                                        ? 'bg-emerald-50 text-emerald-700 border-emerald-200/60 hover:bg-emerald-100'
-                                                        : 'bg-slate-50 text-slate-600 border-slate-200 shadow-sm hover:bg-slate-100'
+                                                        ? 'bg-green-100 text-green-700 border-green-200 hover:bg-green-200'
+                                                        : 'bg-red-50 text-red-600 border-red-200 shadow-sm hover:bg-red-100 hover:border-red-300'
                                                         } ${saving === topic.id ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
                                                 >
                                                     {topic.is_vit_available
@@ -154,7 +154,7 @@ export default function TopicManager() {
                         <div>
                             <div className="flex items-center gap-3 mb-4 mt-8">
                                 <h2 className="text-2xl font-bold text-slate-800">AI Suggested Topics</h2>
-                                <span className="px-2.5 py-1 rounded-lg bg-emerald-50 border border-emerald-100 text-emerald-700 text-xs font-bold uppercase tracking-widest">
+                                <span className="px-2.5 py-1 rounded-lg bg-amber-100 border border-amber-200 text-amber-600 text-xs font-bold uppercase tracking-widest">
                                     {aiTopics.length}
                                 </span>
                             </div>
@@ -184,8 +184,8 @@ export default function TopicManager() {
                                                         disabled={saving === topic.id}
                                                         onClick={() => toggleAvailability(topic)}
                                                         className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all duration-200 active:scale-95 border ${topic.is_vit_available
-                                                            ? 'bg-emerald-50 text-emerald-700 border-emerald-200/60 hover:bg-emerald-100'
-                                                            : 'bg-slate-50 text-slate-600 border-slate-200 shadow-sm hover:bg-slate-100'
+                                                            ? 'bg-green-100 text-green-700 border-green-200 hover:bg-green-200'
+                                                            : 'bg-amber-100 text-amber-600 border-amber-200 shadow-sm hover:bg-amber-200 hover:border-amber-300'
                                                             } ${saving === topic.id ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
                                                     >
                                                         {topic.is_vit_available

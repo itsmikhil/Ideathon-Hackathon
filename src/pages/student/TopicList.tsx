@@ -24,9 +24,9 @@ interface Resource {
 }
 
 const DIFFICULTY_COLORS: Record<string, string> = {
-  beginner: 'bg-emerald-50 text-emerald-700 border border-emerald-200/60',
-  intermediate: 'bg-amber-50 text-amber-700 border border-amber-200/60',
-  advanced: 'bg-rose-50 text-rose-700 border border-rose-200/60',
+  beginner: 'bg-green-100 text-green-600 border border-green-200',
+  intermediate: 'bg-amber-100 text-amber-800 border border-amber-200',
+  advanced: 'bg-red-100 text-red-500 border border-red-200',
 };
 
 function TopicCard({
@@ -69,7 +69,7 @@ function TopicCard({
           <h3 className="text-lg leading-6 font-bold text-slate-900 flex flex-wrap items-center gap-2">
             {topic.title}
             {topic.is_vit_available ? (
-              <span className="inline-flex items-center px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider bg-emerald-50 text-emerald-700 border border-emerald-100">
+              <span className="inline-flex items-center px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider bg-green-100 text-green-600 border border-green-200">
                 <CheckCircle className="w-3.5 h-3.5 mr-1" /> Available at VIT
               </span>
             ) : (
@@ -79,7 +79,7 @@ function TopicCard({
             )}
           </h3>
           {topic.vit_subject_name && (
-            <p className="text-sm font-medium text-indigo-600 mt-1.5 flex items-center gap-1.5"><Book className="w-4 h-4" /> {topic.vit_subject_name}</p>
+            <p className="text-sm font-medium text-amber-500 mt-1.5 flex items-center gap-1.5"><Book className="w-4 h-4" /> {topic.vit_subject_name}</p>
           )}
           <p className="mt-2 text-sm text-slate-600 leading-relaxed">{topic.description}</p>
         </div>
@@ -95,8 +95,8 @@ function TopicCard({
           <button
             onClick={() => onDemand(topic.id, topic.demanded || false)}
             className={`inline-flex items-center px-4 py-2 border text-sm font-bold rounded-xl transition-all duration-200 active:scale-95 ${topic.demanded
-              ? 'bg-purple-100 border-purple-200 text-purple-700 hover:bg-purple-200 hover:border-purple-300'
-              : 'bg-white border-slate-200 text-slate-700 hover:bg-purple-50 hover:border-purple-200 hover:text-purple-700'
+              ? 'bg-amber-100 border-amber-200 text-amber-600 hover:bg-amber-200'
+              : 'bg-white border-slate-200 text-slate-700 hover:bg-amber-50 hover:border-amber-200 hover:text-amber-600'
               }`}
           >
             {topic.demanded ? (
@@ -114,7 +114,7 @@ function TopicCard({
         )}
         <button
           onClick={handleResourceClick}
-          className="inline-flex items-center px-4 py-2 border border-slate-200 text-sm font-bold rounded-xl text-slate-700 bg-white hover:bg-indigo-50 hover:border-indigo-200 hover:text-indigo-700 transition-all duration-200 active:scale-95 shadow-sm"
+          className="inline-flex items-center px-4 py-2 border border-blue-200 text-sm font-bold rounded-xl text-blue-600 bg-blue-100 hover:bg-blue-200 hover:border-blue-300 transition-all duration-200 active:scale-95 shadow-sm"
         >
           {loadingRes ? (
             <Loader2 className="w-4 h-4 mr-1.5 animate-spin" />
@@ -132,9 +132,9 @@ function TopicCard({
 
       {/* Resource panel */}
       {showResources && (
-        <div className="border-t border-indigo-100 bg-indigo-50/50 px-5 py-5 sm:px-6 rounded-b-2xl">
+        <div className="border-t border-slate-200 bg-slate-50/50 px-5 py-5 sm:px-6 rounded-b-2xl">
           {loadingRes ? (
-            <div className="flex items-center gap-2 text-sm font-medium text-indigo-600">
+            <div className="flex items-center gap-2 text-sm font-medium text-amber-500">
               <Loader2 className="w-5 h-5 animate-spin" />
               AI is finding the best free resources...
             </div>
@@ -142,8 +142,8 @@ function TopicCard({
             <p className="text-sm text-slate-500 italic">No resources found.</p>
           ) : (
             <div className="space-y-4">
-              <p className="text-[11px] font-extrabold text-indigo-600 uppercase tracking-widest mb-1">
-                Top Free Resources ✨
+              <p className="text-[11px] font-extrabold text-amber-500 uppercase tracking-widest mb-1 flex items-center gap-1.5">
+                <Sparkles className="w-3 h-3" /> Top Free Resources
               </p>
               {resources.map((r, i) => (
                 <a
@@ -151,29 +151,29 @@ function TopicCard({
                   href={r.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-start gap-4 p-4 bg-white rounded-xl border border-indigo-100/60 hover:border-indigo-300 hover:shadow-md transition-all duration-200 group"
+                  className="flex items-start gap-4 p-4 bg-white rounded-xl border border-slate-200 hover:border-amber-400 hover:shadow-[0_4px_14px_0_rgba(245,158,11,0.10)] transition-all duration-200 group"
                 >
-                  <div className="shrink-0 w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-sm font-bold text-indigo-700">
+                  <div className="shrink-0 w-8 h-8 rounded-full bg-slate-100 flex items-center justify-center text-sm font-bold text-slate-700">
                     {i + 1}
                   </div>
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2 flex-wrap">
-                      <span className="text-sm font-bold text-slate-900 group-hover:text-indigo-700 transition-colors truncate">
+                      <span className="text-sm font-bold text-slate-900 group-hover:text-amber-500 transition-colors truncate">
                         {r.title}
                       </span>
-                      <span className="shrink-0 text-[10px] uppercase font-bold px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 text-emerald-200 border border-emerald-100">
+                      <span className="shrink-0 text-[10px] uppercase font-bold px-2 py-0.5 rounded-md bg-slate-100 text-slate-600 border border-slate-200">
                         {r.platform}
                       </span>
                       {r.is_free && (
-                        <span className="shrink-0 text-[10px] uppercase font-bold px-2 py-0.5 rounded-md bg-blue-50 text-blue-600 border border-blue-100">
+                        <span className="shrink-0 text-[10px] uppercase font-bold px-2 py-0.5 rounded-md bg-green-100 text-green-600 border border-green-200">
                           Free
                         </span>
                       )}
                     </div>
                     <p className="text-sm text-slate-500 mt-1 leading-snug line-clamp-2">{r.description}</p>
-                    <p className="text-xs font-medium text-indigo-400/80 mt-1.5 truncate group-hover:text-indigo-500 transition-colors">{r.url}</p>
+                    <p className="text-xs font-medium text-slate-400 mt-1.5 truncate group-hover:text-amber-500 transition-colors">{r.url}</p>
                   </div>
-                  <ExternalLink className="shrink-0 w-5 h-5 text-slate-300 group-hover:text-indigo-500 mt-1 transition-colors" />
+                  <ExternalLink className="shrink-0 w-5 h-5 text-slate-300 group-hover:text-amber-500 mt-1 transition-colors" />
                 </a>
               ))}
             </div>
@@ -238,9 +238,9 @@ export default function TopicList() {
       {/* VIT Curriculum Subjects */}
       <section>
         <div className="flex items-center gap-3 mb-6 pb-2 border-b border-slate-200">
-          <Book className="w-6 h-6 text-indigo-600" />
+          <Book className="w-6 h-6 text-slate-900" />
           <h2 className="text-2xl font-bold text-slate-800">VIT Curriculum Subjects</h2>
-          <span className="ml-2 px-2.5 py-1 rounded-lg bg-indigo-50 border border-indigo-100 text-indigo-700 text-xs font-bold uppercase tracking-widest">
+          <span className="ml-2 px-2.5 py-1 rounded-lg bg-slate-100 border border-slate-200 text-slate-700 text-xs font-bold uppercase tracking-widest">
             {vitTopics.length} subjects
           </span>
         </div>
@@ -258,17 +258,17 @@ export default function TopicList() {
       {/* AI Suggested Courses */}
       <section>
         <div className="flex items-center gap-3 mb-6 pb-2 border-b border-slate-200">
-          <Sparkles className="w-6 h-6 text-purple-500" />
+          <Sparkles className="w-6 h-6 text-amber-500" />
           <div>
             <div className="flex items-center gap-3">
               <h2 className="text-2xl font-bold text-slate-800">AI Suggested for You</h2>
-              <span className="px-2.5 py-1 rounded-lg bg-purple-50 border border-purple-100 text-purple-700 text-xs font-bold uppercase tracking-widest">
+              <span className="px-2.5 py-1 rounded-lg bg-amber-100 border border-amber-200 text-amber-600 text-xs font-bold uppercase tracking-widest">
                 {aiTopics.length} courses
               </span>
             </div>
           </div>
         </div>
-        <p className="text-[15px] font-medium text-slate-500 mb-6 bg-purple-50/50 p-4 rounded-xl border border-purple-100/50">
+        <p className="text-[15px] font-medium text-slate-500 mb-6 bg-amber-50 rounded-xl border border-amber-100 p-4">
           Courses highly relevant to your domain that aren't yet in the VIT curriculum. Request them to show demand!
         </p>
         {aiTopics.length === 0 ? (

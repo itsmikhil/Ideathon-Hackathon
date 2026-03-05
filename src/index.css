@@ -10,5 +10,5 @@
 }
 
 body {
-  @apply bg-[#F8FAFC] text-slate-800;
+  @apply bg-slate-50 text-slate-700;
 }

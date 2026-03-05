@@ -93,19 +93,19 @@ function BlogCard({ blog }: { blog: BlogPost }) {
         <div className="mt-6 pt-4 flex items-center gap-3 text-sm font-semibold text-slate-500 border-t border-slate-100/50">
           <button
             onClick={handleLike}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-indigo-50 hover:text-indigo-600 transition-colors active:scale-95"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-slate-400 hover:bg-amber-50 hover:text-amber-500 transition-colors active:scale-95"
           >
             <ThumbsUp className="w-4 h-4" /> {upvotes}
           </button>
           <button
             onClick={handleToggle}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors active:scale-95 ${open ? 'bg-indigo-50 text-indigo-600' : 'hover:bg-indigo-50 hover:text-indigo-600'}`}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors active:scale-95 ${open ? 'bg-amber-50 text-amber-500' : 'text-slate-400 hover:bg-amber-50 hover:text-amber-500'}`}
           >
             <MessageSquare className="w-4 h-4" />
             Reply
             {open ? <ChevronUp className="w-4 h-4 ml-1" /> : <ChevronDown className="w-4 h-4 ml-1" />}
           </button>
-          <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-rose-50 hover:text-rose-600 ml-auto transition-colors">
+          <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-slate-400 hover:bg-red-50 hover:text-red-500 ml-auto transition-colors">
             <Flag className="w-4 h-4" /> Flag
           </button>
         </div>
@@ -114,14 +114,14 @@ function BlogCard({ blog }: { blog: BlogPost }) {
       {open && (
         <div className="bg-slate-50/50 px-6 sm:px-8 py-6 space-y-6">
           {loading ? (
-            <div className="flex justify-center"><div className="w-5 h-5 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin"></div></div>
+            <div className="flex justify-center"><div className="w-5 h-5 border-2 border-amber-500 border-t-transparent rounded-full animate-spin"></div></div>
           ) : comments.length === 0 ? (
             <p className="text-sm text-slate-400 italic text-center">No replies yet. Be the first!</p>
           ) : (
             <div className="space-y-4">
               {comments.map(c => (
                 <div key={c.id} className="flex gap-4">
-                  <div className="shrink-0 w-10 h-10 rounded-2xl bg-indigo-100 flex items-center justify-center text-sm font-extrabold text-indigo-700 shadow-sm border border-indigo-200/50">
+                  <div className="shrink-0 w-10 h-10 rounded-2xl bg-slate-100 flex items-center justify-center text-sm font-extrabold text-slate-700 shadow-sm border border-slate-200/50">
                     {c.author_name[0]?.toUpperCase()}
                   </div>
                   <div className="bg-white rounded-2xl rounded-tl-sm shadow-sm border border-slate-200/60 px-4 py-3 flex-1 relative">
@@ -141,12 +141,12 @@ function BlogCard({ blog }: { blog: BlogPost }) {
               value={replyText}
               onChange={e => setReplyText(e.target.value)}
               placeholder="Write a reply…"
-              className="flex-1 border border-slate-200 bg-white rounded-2xl px-5 py-3.5 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-colors"
+              className="flex-1 border border-slate-200 bg-white rounded-2xl px-5 py-3.5 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-colors"
             />
             <button
               type="submit"
               disabled={submitting || !replyText.trim()}
-              className="inline-flex items-center justify-center w-12 h-12 shrink-0 border border-transparent rounded-2xl text-white bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all active:scale-95 shadow-sm shadow-indigo-500/30"
+              className="inline-flex items-center justify-center w-12 h-12 shrink-0 border border-transparent rounded-2xl text-slate-900 bg-amber-500 hover:bg-amber-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all active:scale-95 shadow-md"
             >
               <Send className="w-5 h-5 ml-[-2px]" />
             </button>
@@ -193,7 +193,7 @@ function DoubtCard({ doubt }: { doubt: Doubt }) {
       <div className="p-6 sm:p-8">
         <div className="flex justify-between items-start mb-2">
           <h3 className="text-xl font-extrabold text-slate-800">{doubt.title}</h3>
-          <span className="shrink-0 inline-flex items-center px-3 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider bg-purple-50 text-purple-700 border border-purple-100">
+          <span className="shrink-0 inline-flex items-center px-3 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider bg-slate-100 text-slate-700 border border-slate-200">
             {doubt.subject_tag}
           </span>
         </div>
@@ -203,12 +203,12 @@ function DoubtCard({ doubt }: { doubt: Doubt }) {
         <div className="mt-4 text-slate-600 leading-relaxed">{doubt.content}</div>
         <div className="mt-6 pt-4 flex items-center justify-between text-sm font-semibold text-slate-500 border-t border-slate-100/50">
           <div className="flex gap-3">
-            <button onClick={handleUpvote} className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-purple-50 hover:text-purple-600 transition-colors active:scale-95">
+            <button onClick={handleUpvote} className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-slate-400 hover:bg-amber-50 hover:text-amber-500 transition-colors active:scale-95">
               <ThumbsUp className="w-4 h-4" /> {upvotes}
             </button>
             <button
               onClick={() => setOpen(!open)}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors active:scale-95 ${open ? 'bg-indigo-50 text-indigo-600' : 'hover:bg-indigo-50 hover:text-indigo-600'}`}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors active:scale-95 ${open ? 'bg-amber-50 text-amber-500' : 'text-slate-400 hover:bg-amber-50 hover:text-amber-500'}`}
             >
               <MessageSquare className="w-4 h-4" />
               Answers
@@ -226,7 +226,7 @@ function DoubtCard({ doubt }: { doubt: Doubt }) {
             <div className="space-y-4">
               {replies.map(r => (
                 <div key={r.id} className="flex gap-4">
-                  <div className="shrink-0 w-10 h-10 rounded-2xl bg-purple-100 flex items-center justify-center text-sm font-extrabold text-purple-700 shadow-sm border border-purple-200/50">
+                  <div className="shrink-0 w-10 h-10 rounded-2xl bg-slate-100 flex items-center justify-center text-sm font-extrabold text-slate-700 shadow-sm border border-slate-200/50">
                     {r.author_name[0]?.toUpperCase()}
                   </div>
                   <div className="bg-white rounded-2xl rounded-tl-sm shadow-sm border border-slate-200/60 px-4 py-3 flex-1 relative">
@@ -243,12 +243,12 @@ function DoubtCard({ doubt }: { doubt: Doubt }) {
               value={replyText}
               onChange={e => setReplyText(e.target.value)}
               placeholder="Write an answer…"
-              className="flex-1 border border-slate-200 bg-white rounded-2xl px-5 py-3.5 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-colors"
+              className="flex-1 border border-slate-200 bg-white rounded-2xl px-5 py-3.5 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-colors"
             />
             <button
               type="submit"
               disabled={submitting || !replyText.trim()}
-              className="inline-flex items-center justify-center w-12 h-12 shrink-0 border border-transparent rounded-2xl text-white bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all active:scale-95 shadow-sm shadow-indigo-500/30"
+              className="inline-flex items-center justify-center w-12 h-12 shrink-0 border border-transparent rounded-2xl text-slate-900 bg-amber-500 hover:bg-amber-600 disabled:opacity-50 disabled:cursor-not-allowed transition-all active:scale-95 shadow-md"
             >
               <Send className="w-5 h-5 ml-[-2px]" />
             </button>
@@ -301,7 +301,7 @@ export default function Forum() {
           <button
             onClick={() => setActiveTab('blogs')}
             className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${activeTab === 'blogs'
-              ? 'bg-white text-indigo-600 shadow-sm shadow-slate-200/50'
+              ? 'bg-slate-900 text-white shadow-sm'
               : 'text-slate-500 hover:text-slate-700'
               }`}
           >
@@ -310,7 +310,7 @@ export default function Forum() {
           <button
             onClick={() => setActiveTab('doubts')}
             className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${activeTab === 'doubts'
-              ? 'bg-white text-indigo-600 shadow-sm shadow-slate-200/50'
+              ? 'bg-slate-900 text-white shadow-sm'
               : 'text-slate-500 hover:text-slate-700'
               }`}
           >
@@ -336,7 +336,7 @@ export default function Forum() {
               className="bg-white/80 backdrop-blur-sm shadow-sm rounded-3xl border border-slate-200/60 p-6 sm:p-8"
             >
               <h3 className="text-xl font-extrabold text-slate-800 mb-6 flex items-center">
-                <div className="p-2 bg-indigo-50 text-indigo-600 rounded-xl mr-3">
+                <div className="p-2 bg-amber-50 text-amber-500 rounded-xl mr-3 border border-amber-200">
                   <MessageSquare className="w-5 h-5" />
                 </div>
                 Ask a Doubt
@@ -346,7 +346,7 @@ export default function Forum() {
                   type="text"
                   placeholder="What is your doubt about?"
                   required
-                  className="block w-full border border-slate-200 rounded-2xl px-5 py-4 text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-colors bg-slate-50/50"
+                  className="block w-full border border-slate-200 rounded-2xl px-5 py-4 text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-colors bg-white hover:bg-slate-50/50"
                   value={newDoubt.title}
                   onChange={e => setNewDoubt({ ...newDoubt, title: e.target.value })}
                 />
@@ -354,13 +354,13 @@ export default function Forum() {
                   placeholder="Describe your doubt in detail..."
                   required
                   rows={4}
-                  className="block w-full border border-slate-200 rounded-2xl px-5 py-4 text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-colors bg-slate-50/50 resize-y"
+                  className="block w-full border border-slate-200 rounded-2xl px-5 py-4 text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-colors bg-white hover:bg-slate-50/50 resize-y"
                   value={newDoubt.content}
                   onChange={e => setNewDoubt({ ...newDoubt, content: e.target.value })}
                 />
                 <select
                   required
-                  className="block w-full border border-slate-200 rounded-2xl px-5 py-4 text-sm font-semibold text-slate-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-colors bg-slate-50/50 cursor-pointer"
+                  className="block w-full border border-slate-200 rounded-2xl px-5 py-4 text-sm font-semibold text-slate-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-amber-500/20 focus:border-amber-500 transition-colors bg-white hover:bg-slate-50/50 cursor-pointer"
                   value={newDoubt.subject_tag}
                   onChange={e => setNewDoubt({ ...newDoubt, subject_tag: e.target.value })}
                 >
@@ -389,7 +389,7 @@ export default function Forum() {
                 <div className="pt-2">
                   <button
                     type="submit"
-                    className="w-full inline-flex justify-center items-center py-4 px-6 border border-transparent shadow-[0_4px_14px_0_rgb(99,102,241,0.39)] text-sm font-bold rounded-2xl text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all active:scale-[0.98]"
+                    className="w-full inline-flex justify-center items-center py-4 px-6 border border-transparent shadow-[0_4px_14px_0_rgba(245,158,11,0.39)] text-sm font-bold rounded-2xl text-slate-900 bg-amber-500 hover:bg-amber-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-amber-500 transition-all active:scale-[0.98]"
                   >
                     Post Doubt
                   </button>

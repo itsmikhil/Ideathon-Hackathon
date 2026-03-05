@@ -52,13 +52,13 @@ export default function DomainSelect() {
             <div
               key={domain.id}
               onClick={() => handleSelect(domain.id)}
-              className="bg-white/80 backdrop-blur-sm shadow-sm hover:shadow-xl hover:-translate-y-1 rounded-3xl cursor-pointer transition-all duration-300 border border-slate-200/60 overflow-hidden group"
+              className="bg-white border border-slate-200 shadow-sm hover:shadow-[0_4px_14px_0_rgba(245,158,11,0.10)] hover:border-amber-500 hover:-translate-y-1 rounded-3xl cursor-pointer transition-all duration-300 overflow-hidden group"
             >
               <div className="px-6 py-8 flex flex-col items-center text-center">
-                <div className="p-4 bg-indigo-50 text-indigo-600 rounded-2xl mb-5 group-hover:scale-110 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300 shadow-sm">
+                <div className="p-4 bg-amber-100 text-amber-500 rounded-2xl mb-5 group-hover:scale-110 group-hover:bg-amber-500 group-hover:text-slate-900 transition-all duration-300 shadow-sm border border-amber-200/50">
                   <Icon className="h-8 w-8" />
                 </div>
-                <h3 className="text-xl font-bold text-slate-900 group-hover:text-indigo-700 transition-colors">{domain.name}</h3>
+                <h3 className="text-xl font-bold text-slate-900 group-hover:text-amber-500 transition-colors">{domain.name}</h3>
                 <p className="mt-3 text-sm text-slate-500 leading-relaxed">{domain.description}</p>
               </div>
             </div>
