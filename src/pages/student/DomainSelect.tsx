@@ -40,23 +40,26 @@ export default function DomainSelect() {
   };
 
   return (
-    <div className="py-8">
-      <h1 className="text-3xl font-bold text-gray-900 mb-8 text-center">Choose Your Career Domain</h1>
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="py-12 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="text-center mb-12">
+        <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight">Choose Your Career Domain</h1>
+        <p className="mt-4 text-lg text-slate-500 max-w-2xl mx-auto">Select a path to discover your personalized learning roadmap, spanning both university curriculum and cutting-edge industry skills.</p>
+      </div>
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-8">
         {domains.map((domain) => {
           const Icon = iconMap[domain.icon] || Server;
           return (
             <div
               key={domain.id}
               onClick={() => handleSelect(domain.id)}
-              className="bg-white overflow-hidden shadow rounded-lg cursor-pointer hover:shadow-md transition-shadow duration-200 border border-gray-200"
+              className="bg-white/80 backdrop-blur-sm shadow-sm hover:shadow-xl hover:-translate-y-1 rounded-3xl cursor-pointer transition-all duration-300 border border-slate-200/60 overflow-hidden group"
             >
-              <div className="px-4 py-5 sm:p-6 flex flex-col items-center text-center">
-                <div className="p-3 bg-indigo-100 rounded-full mb-4">
-                  <Icon className="h-8 w-8 text-indigo-600" />
+              <div className="px-6 py-8 flex flex-col items-center text-center">
+                <div className="p-4 bg-indigo-50 text-indigo-600 rounded-2xl mb-5 group-hover:scale-110 group-hover:bg-indigo-600 group-hover:text-white transition-all duration-300 shadow-sm">
+                  <Icon className="h-8 w-8" />
                 </div>
-                <h3 className="text-lg leading-6 font-medium text-gray-900">{domain.name}</h3>
-                <p className="mt-2 text-sm text-gray-500">{domain.description}</p>
+                <h3 className="text-xl font-bold text-slate-900 group-hover:text-indigo-700 transition-colors">{domain.name}</h3>
+                <p className="mt-3 text-sm text-slate-500 leading-relaxed">{domain.description}</p>
               </div>
             </div>
           );

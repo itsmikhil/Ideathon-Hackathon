@@ -83,51 +83,51 @@ function BlogCard({ blog }: { blog: BlogPost }) {
   };
 
   return (
-    <div className="bg-white shadow overflow-hidden sm:rounded-lg border border-gray-200">
-      <div className="p-6">
-        <h3 className="text-xl font-bold text-gray-900">{blog.title}</h3>
-        <p className="mt-1 text-sm text-gray-500">
-          By {blog.teacher_name} &bull; {new Date(blog.published_at).toLocaleDateString()}
+    <div className="bg-white/80 backdrop-blur-sm shadow-sm overflow-hidden rounded-3xl border border-slate-200/60 transition-all hover:shadow-md">
+      <div className="p-6 sm:p-8">
+        <h3 className="text-xl font-extrabold text-slate-800">{blog.title}</h3>
+        <p className="mt-2 text-sm font-medium text-slate-500 flex items-center gap-2">
+          By <span className="text-slate-700 font-bold">{blog.teacher_name}</span> &bull; {new Date(blog.published_at).toLocaleDateString()}
         </p>
-        <div className="mt-4 text-gray-700 whitespace-pre-wrap leading-relaxed">{blog.content}</div>
-        <div className="mt-5 flex items-center space-x-4 text-sm text-gray-500">
+        <div className="mt-5 text-slate-600 whitespace-pre-wrap leading-relaxed">{blog.content}</div>
+        <div className="mt-6 pt-4 flex items-center gap-3 text-sm font-semibold text-slate-500 border-t border-slate-100/50">
           <button
             onClick={handleLike}
-            className="flex items-center gap-1 hover:text-indigo-600 transition-colors"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-indigo-50 hover:text-indigo-600 transition-colors active:scale-95"
           >
             <ThumbsUp className="w-4 h-4" /> {upvotes}
           </button>
           <button
             onClick={handleToggle}
-            className="flex items-center gap-1 hover:text-indigo-600 transition-colors"
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors active:scale-95 ${open ? 'bg-indigo-50 text-indigo-600' : 'hover:bg-indigo-50 hover:text-indigo-600'}`}
           >
             <MessageSquare className="w-4 h-4" />
             Reply
-            {open ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
+            {open ? <ChevronUp className="w-4 h-4 ml-1" /> : <ChevronDown className="w-4 h-4 ml-1" />}
           </button>
-          <button className="flex items-center gap-1 hover:text-red-600 ml-auto transition-colors">
+          <button className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-rose-50 hover:text-rose-600 ml-auto transition-colors">
             <Flag className="w-4 h-4" /> Flag
           </button>
         </div>
       </div>
 
       {open && (
-        <div className="border-t border-gray-100 bg-gray-50 px-6 py-5 space-y-4">
+        <div className="bg-slate-50/50 px-6 sm:px-8 py-6 space-y-6">
           {loading ? (
-            <p className="text-sm text-gray-400">Loading comments…</p>
+            <div className="flex justify-center"><div className="w-5 h-5 border-2 border-indigo-500 border-t-transparent rounded-full animate-spin"></div></div>
           ) : comments.length === 0 ? (
-            <p className="text-sm text-gray-400 italic">No replies yet. Be the first!</p>
+            <p className="text-sm text-slate-400 italic text-center">No replies yet. Be the first!</p>
           ) : (
-            <div className="space-y-3">
+            <div className="space-y-4">
               {comments.map(c => (
-                <div key={c.id} className="flex gap-3">
-                  <div className="shrink-0 w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center text-xs font-bold text-indigo-700">
+                <div key={c.id} className="flex gap-4">
+                  <div className="shrink-0 w-10 h-10 rounded-2xl bg-indigo-100 flex items-center justify-center text-sm font-extrabold text-indigo-700 shadow-sm border border-indigo-200/50">
                     {c.author_name[0]?.toUpperCase()}
                   </div>
-                  <div className="bg-white rounded-lg border border-gray-200 px-3 py-2 flex-1">
-                    <p className="text-xs font-semibold text-gray-700">{c.author_name}</p>
-                    <p className="text-sm text-gray-600 mt-0.5">{c.content}</p>
-                    <p className="text-xs text-gray-400 mt-1">{new Date(c.created_at).toLocaleString()}</p>
+                  <div className="bg-white rounded-2xl rounded-tl-sm shadow-sm border border-slate-200/60 px-4 py-3 flex-1 relative">
+                    <p className="text-xs font-bold text-slate-800">{c.author_name}</p>
+                    <p className="text-sm text-slate-600 mt-1">{c.content}</p>
+                    <p className="text-[10px] uppercase tracking-wider font-bold text-slate-400 mt-2">{new Date(c.created_at).toLocaleString()}</p>
                   </div>
                 </div>
               ))}
@@ -135,21 +135,20 @@ function BlogCard({ blog }: { blog: BlogPost }) {
           )}
 
           {/* Reply form */}
-          <form onSubmit={handleReply} className="flex gap-2 mt-3">
+          <form onSubmit={handleReply} className="flex gap-3 mt-4 relative">
             <input
               type="text"
               value={replyText}
               onChange={e => setReplyText(e.target.value)}
               placeholder="Write a reply…"
-              className="flex-1 border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="flex-1 border border-slate-200 bg-white rounded-2xl px-5 py-3.5 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-colors"
             />
             <button
               type="submit"
               disabled={submitting || !replyText.trim()}
-              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="inline-flex items-center justify-center w-12 h-12 shrink-0 border border-transparent rounded-2xl text-white bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all active:scale-95 shadow-sm shadow-indigo-500/30"
             >
-              <Send className="w-4 h-4 mr-1" />
-              {submitting ? 'Sending…' : 'Send'}
+              <Send className="w-5 h-5 ml-[-2px]" />
             </button>
           </form>
         </div>
@@ -190,65 +189,68 @@ function DoubtCard({ doubt }: { doubt: Doubt }) {
   };
 
   return (
-    <div className="bg-white shadow overflow-hidden sm:rounded-lg border border-gray-200">
-      <div className="p-6">
-        <h3 className="text-lg font-bold text-gray-900">{doubt.title}</h3>
-        <p className="mt-1 text-sm text-gray-500">
-          By {doubt.student_name} &bull; {new Date(doubt.created_at).toLocaleDateString()}
-        </p>
-        <div className="mt-3 text-gray-700">{doubt.content}</div>
-        <div className="mt-4 flex items-center gap-3 text-sm text-gray-500 flex-wrap">
-          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+    <div className="bg-white/80 backdrop-blur-sm shadow-sm overflow-hidden rounded-3xl border border-slate-200/60 transition-all hover:shadow-md">
+      <div className="p-6 sm:p-8">
+        <div className="flex justify-between items-start mb-2">
+          <h3 className="text-xl font-extrabold text-slate-800">{doubt.title}</h3>
+          <span className="shrink-0 inline-flex items-center px-3 py-1 rounded-lg text-[10px] font-bold uppercase tracking-wider bg-purple-50 text-purple-700 border border-purple-100">
             {doubt.subject_tag}
           </span>
-          <button onClick={handleUpvote} className="flex items-center gap-1 hover:text-indigo-600 transition-colors">
-            <ThumbsUp className="w-4 h-4" /> {upvotes}
-          </button>
-          <button
-            onClick={() => setOpen(!open)}
-            className="flex items-center gap-1 hover:text-indigo-600 transition-colors"
-          >
-            <MessageSquare className="w-4 h-4" />
-            Reply
-            {open ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />}
-          </button>
+        </div>
+        <p className="mt-1 text-sm font-medium text-slate-500 flex items-center gap-2">
+          By <span className="text-slate-700 font-bold">{doubt.student_name}</span> &bull; {new Date(doubt.created_at).toLocaleDateString()}
+        </p>
+        <div className="mt-4 text-slate-600 leading-relaxed">{doubt.content}</div>
+        <div className="mt-6 pt-4 flex items-center justify-between text-sm font-semibold text-slate-500 border-t border-slate-100/50">
+          <div className="flex gap-3">
+            <button onClick={handleUpvote} className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-purple-50 hover:text-purple-600 transition-colors active:scale-95">
+              <ThumbsUp className="w-4 h-4" /> {upvotes}
+            </button>
+            <button
+              onClick={() => setOpen(!open)}
+              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors active:scale-95 ${open ? 'bg-indigo-50 text-indigo-600' : 'hover:bg-indigo-50 hover:text-indigo-600'}`}
+            >
+              <MessageSquare className="w-4 h-4" />
+              Answers
+              {open ? <ChevronUp className="w-4 h-4 ml-1" /> : <ChevronDown className="w-4 h-4 ml-1" />}
+            </button>
+          </div>
         </div>
       </div>
 
       {open && (
-        <div className="border-t border-gray-100 bg-gray-50 px-6 py-5 space-y-4">
+        <div className="bg-slate-50/50 px-6 sm:px-8 py-6 space-y-6">
           {replies.length === 0 ? (
-            <p className="text-sm text-gray-400 italic">No answers yet.</p>
+            <p className="text-sm text-slate-400 italic text-center">No answers yet.</p>
           ) : (
-            <div className="space-y-3">
+            <div className="space-y-4">
               {replies.map(r => (
-                <div key={r.id} className="flex gap-3">
-                  <div className="shrink-0 w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-xs font-bold text-purple-700">
+                <div key={r.id} className="flex gap-4">
+                  <div className="shrink-0 w-10 h-10 rounded-2xl bg-purple-100 flex items-center justify-center text-sm font-extrabold text-purple-700 shadow-sm border border-purple-200/50">
                     {r.author_name[0]?.toUpperCase()}
                   </div>
-                  <div className="bg-white rounded-lg border border-gray-200 px-3 py-2 flex-1">
-                    <p className="text-xs font-semibold text-gray-700">{r.author_name}</p>
-                    <p className="text-sm text-gray-600 mt-0.5">{r.content}</p>
+                  <div className="bg-white rounded-2xl rounded-tl-sm shadow-sm border border-slate-200/60 px-4 py-3 flex-1 relative">
+                    <p className="text-xs font-bold text-slate-800">{r.author_name}</p>
+                    <p className="text-sm text-slate-600 mt-1">{r.content}</p>
                   </div>
                 </div>
               ))}
             </div>
           )}
-          <form onSubmit={handleReply} className="flex gap-2">
+          <form onSubmit={handleReply} className="flex gap-3 relative mt-4">
             <input
               type="text"
               value={replyText}
               onChange={e => setReplyText(e.target.value)}
               placeholder="Write an answer…"
-              className="flex-1 border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="flex-1 border border-slate-200 bg-white rounded-2xl px-5 py-3.5 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-colors"
             />
             <button
               type="submit"
               disabled={submitting || !replyText.trim()}
-              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="inline-flex items-center justify-center w-12 h-12 shrink-0 border border-transparent rounded-2xl text-white bg-indigo-600 hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all active:scale-95 shadow-sm shadow-indigo-500/30"
             >
-              <Send className="w-4 h-4 mr-1" />
-              {submitting ? 'Sending…' : 'Send'}
+              <Send className="w-5 h-5 ml-[-2px]" />
             </button>
           </form>
         </div>
@@ -292,35 +294,34 @@ export default function Forum() {
   };
 
   return (
-    <div className="py-8">
-      <h1 className="text-3xl font-bold text-gray-900 mb-8">Community Forum</h1>
-
-      <div className="border-b border-gray-200 mb-6">
-        <nav className="-mb-px flex space-x-8">
+    <div className="py-12 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-8 gap-4">
+        <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight">Community Forum</h1>
+        <div className="p-1.5 bg-slate-100 rounded-2xl flex items-center shadow-inner self-start sm:self-auto">
           <button
             onClick={() => setActiveTab('blogs')}
-            className={`${activeTab === 'blogs'
-              ? 'border-indigo-500 text-indigo-600'
-              : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-              } whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
+            className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${activeTab === 'blogs'
+              ? 'bg-white text-indigo-600 shadow-sm shadow-slate-200/50'
+              : 'text-slate-500 hover:text-slate-700'
+              }`}
           >
             Teacher Blogs
           </button>
           <button
             onClick={() => setActiveTab('doubts')}
-            className={`${activeTab === 'doubts'
-              ? 'border-indigo-500 text-indigo-600'
-              : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
-              } whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm`}
+            className={`px-5 py-2.5 rounded-xl text-sm font-bold transition-all ${activeTab === 'doubts'
+              ? 'bg-white text-indigo-600 shadow-sm shadow-slate-200/50'
+              : 'text-slate-500 hover:text-slate-700'
+              }`}
           >
             Student Doubts
           </button>
-        </nav>
+        </div>
       </div>
 
       {activeTab === 'blogs' && (
         <div className="space-y-6">
-          {blogs.length === 0 && <p className="text-gray-500 italic">No blog posts yet.</p>}
+          {blogs.length === 0 && <p className="text-slate-500 italic text-center py-10 bg-white/50 rounded-3xl border border-slate-200/50">No blog posts yet.</p>}
           {blogs.map(blog => (
             <BlogCard key={blog.id} blog={blog} />
           ))}
@@ -332,33 +333,38 @@ export default function Forum() {
           {user?.role === 'student' && (
             <form
               onSubmit={handleDoubtSubmit}
-              className="bg-white shadow sm:rounded-lg border border-gray-200 p-6"
+              className="bg-white/80 backdrop-blur-sm shadow-sm rounded-3xl border border-slate-200/60 p-6 sm:p-8"
             >
-              <h3 className="text-lg font-medium text-gray-900 mb-4">Ask a Doubt</h3>
-              <div className="space-y-4">
+              <h3 className="text-xl font-extrabold text-slate-800 mb-6 flex items-center">
+                <div className="p-2 bg-indigo-50 text-indigo-600 rounded-xl mr-3">
+                  <MessageSquare className="w-5 h-5" />
+                </div>
+                Ask a Doubt
+              </h3>
+              <div className="space-y-5">
                 <input
                   type="text"
-                  placeholder="Title"
+                  placeholder="What is your doubt about?"
                   required
-                  className="block w-full border border-gray-300 rounded-md px-3 py-2 text-sm shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                  className="block w-full border border-slate-200 rounded-2xl px-5 py-4 text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-colors bg-slate-50/50"
                   value={newDoubt.title}
                   onChange={e => setNewDoubt({ ...newDoubt, title: e.target.value })}
                 />
                 <textarea
-                  placeholder="Describe your doubt..."
+                  placeholder="Describe your doubt in detail..."
                   required
-                  rows={3}
-                  className="block w-full border border-gray-300 rounded-md px-3 py-2 text-sm shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                  rows={4}
+                  className="block w-full border border-slate-200 rounded-2xl px-5 py-4 text-sm font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-colors bg-slate-50/50 resize-y"
                   value={newDoubt.content}
                   onChange={e => setNewDoubt({ ...newDoubt, content: e.target.value })}
                 />
                 <select
                   required
-                  className="block w-full border border-gray-300 rounded-md px-3 py-2 text-sm shadow-sm focus:ring-indigo-500 focus:border-indigo-500"
+                  className="block w-full border border-slate-200 rounded-2xl px-5 py-4 text-sm font-semibold text-slate-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-colors bg-slate-50/50 cursor-pointer"
                   value={newDoubt.subject_tag}
                   onChange={e => setNewDoubt({ ...newDoubt, subject_tag: e.target.value })}
                 >
-                  <option value="">Select Subject Tag</option>
+                  <option value="">Select Related Subject</option>
                   <option value="Data Structures and Algorithms">Data Structures and Algorithms</option>
                   <option value="Database Management Systems">Database Management Systems</option>
                   <option value="Operating Systems">Operating Systems</option>
@@ -380,17 +386,19 @@ export default function Forum() {
                   <option value="Mobile Application Development">Mobile Application Development</option>
                   <option value="Object Oriented Programming">Object Oriented Programming</option>
                 </select>
-                <button
-                  type="submit"
-                  className="inline-flex items-center justify-center py-2 px-6 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-                >
-                  Publish Post
-                </button>
+                <div className="pt-2">
+                  <button
+                    type="submit"
+                    className="w-full inline-flex justify-center items-center py-4 px-6 border border-transparent shadow-[0_4px_14px_0_rgb(99,102,241,0.39)] text-sm font-bold rounded-2xl text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all active:scale-[0.98]"
+                  >
+                    Post Doubt
+                  </button>
+                </div>
               </div>
             </form>
           )}
 
-          {doubts.length === 0 && <p className="text-gray-500 italic">No doubts posted yet.</p>}
+          {doubts.length === 0 && <p className="text-slate-500 italic text-center py-10 bg-white/50 rounded-3xl border border-slate-200/50">No doubts posted yet.</p>}
           {doubts.map(doubt => (
             <DoubtCard key={doubt.id} doubt={doubt} />
           ))}

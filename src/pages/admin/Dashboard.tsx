@@ -27,75 +27,82 @@ export default function AdminDashboard() {
   }, []);
 
   return (
-    <div className="py-8 space-y-8">
-      <h1 className="text-3xl font-bold text-gray-900">Admin Dashboard</h1>
+    <div className="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <div className="mb-8">
+        <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight">Admin Overview</h1>
+      </div>
 
-      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-        <div className="bg-white shadow sm:rounded-lg border border-gray-200 p-6">
-          <h3 className="text-lg leading-6 font-medium text-gray-900 mb-4 flex items-center">
-            <BarChart className="h-5 w-5 mr-2 text-indigo-600" />
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-2 lg:gap-8">
+        <div className="bg-white/80 backdrop-blur-sm shadow-sm rounded-3xl border border-slate-200/60 p-6 sm:p-8">
+          <h3 className="text-lg font-bold text-slate-800 mb-6 flex items-center">
+            <div className="p-2 bg-indigo-50 text-indigo-600 rounded-xl mr-3">
+              <BarChart className="h-5 w-5" />
+            </div>
             Student Domain Interest
           </h3>
-          <ul className="divide-y divide-gray-200">
+          <ul className="divide-y divide-slate-100">
             {domainInterest.map(domain => (
-              <li key={domain.name} className="py-4 flex justify-between">
-                <span className="text-sm font-medium text-gray-900">{domain.name}</span>
-                <span className="text-sm text-gray-500">{domain.count} students</span>
+              <li key={domain.name} className="py-4 flex justify-between items-center group">
+                <span className="text-sm font-semibold text-slate-700 group-hover:text-indigo-600 transition-colors">{domain.name}</span>
+                <span className="text-xs font-bold px-3 py-1 bg-slate-100 text-slate-600 rounded-lg">{domain.count} students</span>
               </li>
             ))}
           </ul>
         </div>
 
-        <div className="bg-white shadow sm:rounded-lg border border-gray-200 p-6">
-          <h3 className="text-lg leading-6 font-medium text-gray-900 mb-4 flex items-center">
-            <Users className="h-5 w-5 mr-2 text-indigo-600" />
+        <div className="bg-white/80 backdrop-blur-sm shadow-sm rounded-3xl border border-slate-200/60 p-6 sm:p-8">
+          <h3 className="text-lg font-bold text-slate-800 mb-6 flex items-center">
+            <div className="p-2 bg-indigo-50 text-indigo-600 rounded-xl mr-3">
+              <Users className="h-5 w-5" />
+            </div>
             Teacher Leaderboard
           </h3>
-          <ul className="divide-y divide-gray-200">
+          <ul className="divide-y divide-slate-100">
             {leaderboard.map(teacher => (
-              <li key={teacher.id} className="py-4 flex justify-between">
-                <span className="text-sm font-medium text-gray-900">{teacher.name}</span>
-                <span className="text-sm text-gray-500">{teacher.total_points} pts</span>
+              <li key={teacher.id} className="py-4 flex justify-between items-center group">
+                <span className="text-sm font-semibold text-slate-700 group-hover:text-indigo-600 transition-colors">{teacher.name}</span>
+                <span className="text-xs font-bold px-3 py-1 bg-indigo-50 text-indigo-700 rounded-lg">{teacher.total_points} pts</span>
               </li>
             ))}
           </ul>
         </div>
 
-        <div className="bg-white shadow sm:rounded-lg border border-gray-200 p-6">
-          <h3 className="text-lg leading-6 font-medium text-gray-900 mb-4 flex items-center">
-            <RefreshCw className="h-5 w-5 mr-2 text-purple-600" />
+        <div className="bg-white/80 backdrop-blur-sm shadow-sm rounded-3xl border border-slate-200/60 p-6 sm:p-8">
+          <h3 className="text-lg font-bold text-slate-800 mb-6 flex items-center">
+            <div className="p-2 bg-purple-50 text-purple-600 rounded-xl mr-3">
+              <RefreshCw className="h-5 w-5" />
+            </div>
             Topic Demand (Not in VIT)
           </h3>
           {topicDemand.length === 0 ? (
-            <p className="text-sm text-gray-500 italic py-4">No topic demands recorded yet.</p>
+            <p className="text-sm text-slate-500 italic py-4">No topic demands recorded yet.</p>
           ) : (
-            <ul className="divide-y divide-gray-100">
+            <ul className="divide-y divide-slate-100">
               {topicDemand.map((topic, idx) => {
-                // Calculate percentage relative to highest demanded topic for the progress bar
                 const maxDemand = Math.max(...topicDemand.map(t => Number(t.demand_count) || 0));
                 const currentDemand = Number(topic.demand_count) || 0;
                 const percentage = maxDemand > 0 ? (currentDemand / maxDemand) * 100 : 0;
 
                 return (
-                  <li key={`${topic.title}-${idx}`} className="py-4 flex flex-col gap-2">
+                  <li key={`${topic.title}-${idx}`} className="py-4 flex flex-col gap-2.5">
                     <div className="flex justify-between items-start">
                       <div>
-                        <span className="text-sm font-medium text-gray-900">{topic.title}</span>
-                        <div className="mt-1">
-                          <span className="inline-flex items-center px-2 py-0.5 rounded text-[10px] font-medium bg-purple-50 text-purple-700 border border-purple-100">
+                        <span className="text-sm font-bold text-slate-800">{topic.title}</span>
+                        <div className="mt-1.5">
+                          <span className="inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-bold uppercase tracking-wider bg-purple-50 text-purple-700 border border-purple-100/50">
                             {topic.domain_name}
                           </span>
                         </div>
                       </div>
-                      <div className="flex items-center bg-gray-50 px-2 py-1 rounded border border-gray-100">
-                        <span className="text-sm font-bold text-purple-700">{currentDemand}</span>
-                        <span className="text-xs text-gray-500 ml-1">votes</span>
+                      <div className="flex items-center bg-slate-50 px-3 py-1.5 rounded-xl border border-slate-100 shadow-sm">
+                        <span className="text-sm font-extrabold text-purple-700">{currentDemand}</span>
+                        <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 ml-1.5">votes</span>
                       </div>
                     </div>
                     {/* Progress Bar */}
-                    <div className="w-full bg-gray-100 rounded-full h-1.5 mt-1 overflow-hidden">
+                    <div className="w-full bg-slate-100 rounded-full h-1.5 mt-1 overflow-hidden">
                       <div
-                        className="bg-purple-500 h-1.5 rounded-full transition-all duration-500 ease-out"
+                        className="bg-gradient-to-r from-purple-500 to-indigo-500 h-1.5 rounded-full transition-all duration-700 ease-out"
                         style={{ width: `${percentage}%` }}
                       ></div>
                     </div>
@@ -106,28 +113,34 @@ export default function AdminDashboard() {
           )}
         </div>
 
-        <div className="bg-white shadow sm:rounded-lg border border-gray-200 p-6">
-          <h3 className="text-lg leading-6 font-medium text-gray-900 mb-4 flex items-center text-red-600">
-            <AlertTriangle className="h-5 w-5 mr-2" />
+        <div className="bg-white/80 backdrop-blur-sm shadow-sm rounded-3xl border border-slate-200/60 p-6 sm:p-8">
+          <h3 className="text-lg font-bold text-slate-800 mb-6 flex items-center">
+            <div className="p-2 bg-red-50 text-red-600 rounded-xl mr-3">
+              <AlertTriangle className="h-5 w-5" />
+            </div>
             Flagged Content
           </h3>
           <div className="space-y-4">
             {flaggedContent.blogs.map((blog: any) => (
-              <div key={blog.id} className="p-4 bg-red-50 rounded-md border border-red-200">
-                <h4 className="text-sm font-bold text-red-800">Blog: {blog.title}</h4>
-                <p className="text-xs text-red-600 mt-1">{blog.content.substring(0, 100)}...</p>
-                <button className="mt-2 text-xs font-medium text-red-700 hover:text-red-900">Remove Post</button>
+              <div key={blog.id} className="p-5 bg-rose-50/50 rounded-2xl border border-rose-100/60">
+                <h4 className="text-sm font-bold text-rose-800">Blog: {blog.title}</h4>
+                <p className="text-sm text-rose-600/80 mt-1.5 leading-snug">{blog.content.substring(0, 100)}...</p>
+                <button className="mt-3 text-xs font-bold text-rose-700 hover:text-rose-900 uppercase tracking-wider px-3 py-1.5 bg-rose-100/50 hover:bg-rose-200 rounded-lg transition-colors">
+                  Remove Post
+                </button>
               </div>
             ))}
             {flaggedContent.doubts.map((doubt: any) => (
-              <div key={doubt.id} className="p-4 bg-red-50 rounded-md border border-red-200">
-                <h4 className="text-sm font-bold text-red-800">Doubt: {doubt.title}</h4>
-                <p className="text-xs text-red-600 mt-1">{doubt.content.substring(0, 100)}...</p>
-                <button className="mt-2 text-xs font-medium text-red-700 hover:text-red-900">Remove Doubt</button>
+              <div key={doubt.id} className="p-5 bg-rose-50/50 rounded-2xl border border-rose-100/60">
+                <h4 className="text-sm font-bold text-rose-800">Doubt: {doubt.title}</h4>
+                <p className="text-sm text-rose-600/80 mt-1.5 leading-snug">{doubt.content.substring(0, 100)}...</p>
+                <button className="mt-3 text-xs font-bold text-rose-700 hover:text-rose-900 uppercase tracking-wider px-3 py-1.5 bg-rose-100/50 hover:bg-rose-200 rounded-lg transition-colors">
+                  Remove Doubt
+                </button>
               </div>
             ))}
             {flaggedContent.blogs.length === 0 && flaggedContent.doubts.length === 0 && (
-              <p className="text-sm text-gray-500">No flagged content.</p>
+              <p className="text-sm text-slate-500 italic">No flagged content.</p>
             )}
           </div>
         </div>

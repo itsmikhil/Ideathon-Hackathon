@@ -43,7 +43,7 @@ export default function Navbar() {
   if (!user) return null;
 
   return (
-    <nav className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
+    <nav className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100 shadow-sm transition-all">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           {/* Left: Logo + Nav links */}
@@ -58,15 +58,15 @@ export default function Navbar() {
               <div className="relative" ref={dropdownRef}>
                 <button
                   onClick={() => setDomainOpen(prev => !prev)}
-                  className="flex items-center gap-1 text-sm font-medium text-gray-600 hover:text-indigo-600 py-2 transition-colors"
+                  className="flex items-center gap-1.5 px-3 py-2 text-sm font-semibold text-slate-600 rounded-md hover:text-indigo-600 hover:bg-indigo-50/50 transition-all duration-200"
                 >
                   <LayoutGrid className="w-4 h-4" />
                   Domains
-                  <ChevronDown className={`w-4 h-4 transition-transform ${domainOpen ? 'rotate-180' : ''}`} />
+                  <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${domainOpen ? 'rotate-180 text-indigo-500' : 'text-slate-400'}`} />
                 </button>
 
                 {domainOpen && (
-                  <div className="absolute left-0 mt-1 w-64 rounded-lg shadow-lg bg-white ring-1 ring-black ring-opacity-5 z-50 overflow-hidden">
+                  <div className="absolute left-0 mt-2 w-64 rounded-xl shadow-xl shadow-indigo-100/20 bg-white ring-1 ring-slate-900/5 z-50 overflow-hidden transform origin-top transition-all">
                     <div className="py-1">
                       {domains.length === 0 ? (
                         <p className="px-4 py-3 text-sm text-gray-400">Loading…</p>
@@ -100,7 +100,7 @@ export default function Navbar() {
 
               <Link
                 to="/community"
-                className="text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors"
+                className="px-3 py-2 text-sm font-semibold text-slate-600 rounded-md hover:text-indigo-600 hover:bg-indigo-50/50 transition-all duration-200"
               >
                 Forum
               </Link>
@@ -108,7 +108,7 @@ export default function Navbar() {
               {user.role === 'teacher' && (
                 <Link
                   to="/teacher/dashboard"
-                  className="text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors"
+                  className="px-3 py-2 text-sm font-semibold text-slate-600 rounded-md hover:text-indigo-600 hover:bg-indigo-50/50 transition-all duration-200"
                 >
                   Dashboard
                 </Link>
@@ -118,13 +118,13 @@ export default function Navbar() {
                 <>
                   <Link
                     to="/admin/dashboard"
-                    className="text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors"
+                    className="px-3 py-2 text-sm font-semibold text-slate-600 rounded-md hover:text-indigo-600 hover:bg-indigo-50/50 transition-all duration-200"
                   >
                     Dashboard
                   </Link>
                   <Link
                     to="/admin/topics"
-                    className="text-sm font-medium text-gray-600 hover:text-indigo-600 transition-colors"
+                    className="px-3 py-2 text-sm font-semibold text-slate-600 rounded-md hover:text-indigo-600 hover:bg-indigo-50/50 transition-all duration-200"
                   >
                     Manage Topics
                   </Link>
@@ -135,18 +135,21 @@ export default function Navbar() {
 
           {/* Right: User info + Logout */}
           <div className="flex items-center gap-4">
-            <div className="hidden sm:flex items-center text-sm font-medium text-gray-500 gap-1.5">
-              <div className="w-7 h-7 rounded-full bg-indigo-100 flex items-center justify-center text-xs font-bold text-indigo-700">
+            <div className="hidden sm:flex items-center text-sm font-medium text-slate-600 gap-2">
+              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-indigo-100 to-purple-100 border border-indigo-200 shadow-sm flex items-center justify-center text-sm font-bold text-indigo-700">
                 {user.name[0]?.toUpperCase()}
               </div>
-              <span>{user.name}</span>
-              <span className="text-xs px-1.5 py-0.5 rounded bg-gray-100 text-gray-600 capitalize">{user.role}</span>
+              <div className="flex flex-col leading-tight">
+                <span className="font-semibold text-slate-800">{user.name}</span>
+                <span className="text-[10px] uppercase tracking-wider font-bold text-slate-500">{user.role}</span>
+              </div>
             </div>
+            <div className="h-6 w-px bg-slate-200 mx-1 hidden sm:block"></div>
             <button
               onClick={handleLogout}
-              className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
+              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-semibold shadow-sm rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-all duration-200 active:scale-95"
             >
-              <LogOut className="h-4 w-4 mr-1" />
+              <LogOut className="h-4 w-4 mr-1.5" />
               Logout
             </button>
           </div>
