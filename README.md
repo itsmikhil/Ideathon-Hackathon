@@ -14,7 +14,7 @@ Built for VIT students and faculty. Career roadmaps, curated resources, and a co
 [![PostgreSQL](https://img.shields.io/badge/PostgreSQL-0A1628?style=flat-square&logo=postgresql&logoColor=4D9FFF)](https://postgresql.org)
 [![License](https://img.shields.io/badge/License-MIT-0A1628?style=flat-square)](LICENSE)
 
-[Live Demo](#) · [Report Bug](https://github.com/itsmikhil/Ideathon-Hackathon/issues) · [Request Feature](https://github.com/itsmikhil/Ideathon-Hackathon/issues)
+[Report Bug](https://github.com/itsmikhil/Ideathon-Hackathon/issues) · [Request Feature](https://github.com/itsmikhil/Ideathon-Hackathon/issues)
 
 </div>
 
