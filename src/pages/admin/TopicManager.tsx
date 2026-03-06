@@ -19,9 +19,9 @@ interface Topic {
 }
 
 const DIFFICULTY_COLORS: Record<string, string> = {
-    beginner: 'bg-success-50 text-success-700 border border-success-200/60',
-    intermediate: 'bg-warning-50 text-warning-700 border border-warning-200/60',
-    advanced: 'bg-error-50 text-error-700 border border-error-200/60',
+    beginner: 'bg-emerald-50 text-emerald-700 border border-emerald-200/60',
+    intermediate: 'bg-amber-50 text-amber-700 border border-amber-200/60',
+    advanced: 'bg-rose-50 text-rose-700 border border-rose-200/60',
 };
 
 export default function TopicManager() {
@@ -68,17 +68,17 @@ export default function TopicManager() {
         <div className="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-4">
                 <div>
-                    <h1 className="text-4xl font-extrabold text-ink-900 tracking-tight">Manage Course Availability</h1>
-                    <p className="mt-3 text-lg text-ink-500 max-w-2xl">
+                    <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight">Manage Course Availability</h1>
+                    <p className="mt-3 text-lg text-slate-500 max-w-2xl">
                         Toggle whether a VIT curriculum subject is <strong>currently offered</strong> this semester. Students can vote to request subjects that are not currently available.
                     </p>
                 </div>
             </div>
 
             {/* Domain Selector */}
-            <div className="relative w-72 bg-white/95 backdrop-blur p-1 rounded-xl shadow-sm border border-ink-200/60">
+            <div className="relative w-72 bg-white/80 backdrop-blur p-1 rounded-xl shadow-sm border border-slate-200/60">
                 <select
-                    className="block w-full appearance-none bg-transparent border-none py-2.5 pl-4 pr-10 text-sm font-semibold text-ink-700 focus:outline-none focus:ring-0 cursor-pointer"
+                    className="block w-full appearance-none bg-transparent border-none py-2.5 pl-4 pr-10 text-sm font-semibold text-slate-700 focus:outline-none focus:ring-0 cursor-pointer"
                     value={selectedDomainId}
                     onChange={e => setSelectedDomainId(e.target.value)}
                 >
@@ -86,45 +86,45 @@ export default function TopicManager() {
                         <option key={d.id} value={d.id} className="font-medium">{d.name}</option>
                     ))}
                 </select>
-                <ChevronDown className="pointer-events-none absolute right-4 top-3 h-5 w-5 text-accent-500" />
+                <ChevronDown className="pointer-events-none absolute right-4 top-3 h-5 w-5 text-indigo-500" />
             </div>
 
             {loading ? (
                 <div className="flex items-center justify-center h-40">
-                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-accent-600" />
+                    <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600" />
                 </div>
             ) : (
                 <div className="space-y-8">
                     {/* VIT / curriculum topics */}
                     <div>
                         <div className="flex items-center gap-3 mb-4">
-                            <h2 className="text-2xl font-bold text-ink-900">VIT Curriculum Subjects</h2>
-                            <span className="px-2.5 py-1 rounded-lg bg-accent-50 border border-accent-100 text-accent-700 text-xs font-bold uppercase tracking-widest">
+                            <h2 className="text-2xl font-bold text-slate-800">VIT Curriculum Subjects</h2>
+                            <span className="px-2.5 py-1 rounded-lg bg-indigo-50 border border-indigo-100 text-indigo-700 text-xs font-bold uppercase tracking-widest">
                                 {vitTopics.length}
                             </span>
                         </div>
-                        <div className="bg-white/95 backdrop-blur-sm shadow-sm rounded-3xl border border-ink-200/60 overflow-hidden">
-                            <table className="min-w-full divide-y divide-ink-100">
-                                <thead className="bg-ink-100/50">
+                        <div className="bg-white/80 backdrop-blur-sm shadow-sm rounded-3xl border border-slate-200/60 overflow-hidden">
+                            <table className="min-w-full divide-y divide-slate-100">
+                                <thead className="bg-slate-50/50">
                                     <tr>
-                                        <th className="px-6 py-4 text-left text-xs font-bold text-ink-500 uppercase tracking-widest">Subject</th>
-                                        <th className="px-6 py-4 text-left text-xs font-bold text-ink-500 uppercase tracking-widest">VIT Course Name</th>
-                                        <th className="px-6 py-4 text-left text-xs font-bold text-ink-500 uppercase tracking-widest">Difficulty</th>
-                                        <th className="px-6 py-4 text-left text-xs font-bold text-ink-500 uppercase tracking-widest">Currently Offered</th>
+                                        <th className="px-6 py-4 text-left text-xs font-bold text-slate-500 uppercase tracking-widest">Subject</th>
+                                        <th className="px-6 py-4 text-left text-xs font-bold text-slate-500 uppercase tracking-widest">VIT Course Name</th>
+                                        <th className="px-6 py-4 text-left text-xs font-bold text-slate-500 uppercase tracking-widest">Difficulty</th>
+                                        <th className="px-6 py-4 text-left text-xs font-bold text-slate-500 uppercase tracking-widest">Currently Offered</th>
                                     </tr>
                                 </thead>
-                                <tbody className="divide-y divide-ink-100">
+                                <tbody className="divide-y divide-slate-100">
                                     {vitTopics.length === 0 ? (
-                                        <tr><td colSpan={4} className="px-6 py-8 text-sm text-ink-500 text-center italic">No VIT subjects found for this domain.</td></tr>
+                                        <tr><td colSpan={4} className="px-6 py-8 text-sm text-slate-500 text-center italic">No VIT subjects found for this domain.</td></tr>
                                     ) : vitTopics.map(topic => (
-                                        <tr key={topic.id} className="hover:bg-ink-50/50 transition-colors">
+                                        <tr key={topic.id} className="hover:bg-slate-50/50 transition-colors">
                                             <td className="px-6 py-4">
-                                                <div className="text-sm font-bold text-ink-900">{topic.title}</div>
-                                                <div className="text-sm text-ink-500 mt-1 max-w-sm truncate">{topic.description}</div>
+                                                <div className="text-sm font-bold text-slate-800">{topic.title}</div>
+                                                <div className="text-sm text-slate-500 mt-1 max-w-sm truncate">{topic.description}</div>
                                             </td>
-                                            <td className="px-6 py-4 text-sm font-medium text-ink-600">{topic.vit_subject_name || '—'}</td>
+                                            <td className="px-6 py-4 text-sm font-medium text-slate-600">{topic.vit_subject_name || '—'}</td>
                                             <td className="px-6 py-4">
-                                                <span className={`inline-flex items-center px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-widest border ${DIFFICULTY_COLORS[topic.difficulty] || 'bg-ink-100 text-ink-700 border-ink-200'}`}>
+                                                <span className={`inline-flex items-center px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-widest border ${DIFFICULTY_COLORS[topic.difficulty] || 'bg-slate-100 text-slate-700 border-slate-200'}`}>
                                                     {topic.difficulty}
                                                 </span>
                                             </td>
@@ -133,8 +133,8 @@ export default function TopicManager() {
                                                     disabled={saving === topic.id}
                                                     onClick={() => toggleAvailability(topic)}
                                                     className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all duration-200 active:scale-95 border ${topic.is_vit_available
-                                                        ? 'bg-success-50 text-success-700 border-success-200/60 hover:bg-success-100'
-                                                        : 'bg-ink-50 text-ink-600 border-ink-200 shadow-sm hover:bg-ink-100'
+                                                        ? 'bg-emerald-50 text-emerald-700 border-emerald-200/60 hover:bg-emerald-100'
+                                                        : 'bg-slate-50 text-slate-600 border-slate-200 shadow-sm hover:bg-slate-100'
                                                         } ${saving === topic.id ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
                                                 >
                                                     {topic.is_vit_available
@@ -153,29 +153,29 @@ export default function TopicManager() {
                     {aiTopics.length > 0 && (
                         <div>
                             <div className="flex items-center gap-3 mb-4 mt-8">
-                                <h2 className="text-2xl font-bold text-ink-900">AI Suggested Topics</h2>
-                                <span className="px-2.5 py-1 rounded-lg bg-warning-50 border border-warning-100 text-warning-700 text-xs font-bold uppercase tracking-widest">
+                                <h2 className="text-2xl font-bold text-slate-800">AI Suggested Topics</h2>
+                                <span className="px-2.5 py-1 rounded-lg bg-emerald-50 border border-emerald-100 text-emerald-700 text-xs font-bold uppercase tracking-widest">
                                     {aiTopics.length}
                                 </span>
                             </div>
-                            <div className="bg-white/95 backdrop-blur-sm shadow-sm rounded-3xl border border-ink-200/60 overflow-hidden">
-                                <table className="min-w-full divide-y divide-ink-100">
-                                    <thead className="bg-ink-100/50">
+                            <div className="bg-white/80 backdrop-blur-sm shadow-sm rounded-3xl border border-slate-200/60 overflow-hidden">
+                                <table className="min-w-full divide-y divide-slate-100">
+                                    <thead className="bg-slate-50/50">
                                         <tr>
-                                            <th className="px-6 py-4 text-left text-xs font-bold text-ink-500 uppercase tracking-widest">Topic</th>
-                                            <th className="px-6 py-4 text-left text-xs font-bold text-ink-500 uppercase tracking-widest">Difficulty</th>
-                                            <th className="px-6 py-4 text-left text-xs font-bold text-ink-500 uppercase tracking-widest">Mark as VIT Course</th>
+                                            <th className="px-6 py-4 text-left text-xs font-bold text-slate-500 uppercase tracking-widest">Topic</th>
+                                            <th className="px-6 py-4 text-left text-xs font-bold text-slate-500 uppercase tracking-widest">Difficulty</th>
+                                            <th className="px-6 py-4 text-left text-xs font-bold text-slate-500 uppercase tracking-widest">Mark as VIT Course</th>
                                         </tr>
                                     </thead>
-                                    <tbody className="divide-y divide-ink-100">
+                                    <tbody className="divide-y divide-slate-100">
                                         {aiTopics.map(topic => (
-                                            <tr key={topic.id} className="hover:bg-ink-50/50 transition-colors">
+                                            <tr key={topic.id} className="hover:bg-slate-50/50 transition-colors">
                                                 <td className="px-6 py-4">
-                                                    <div className="text-sm font-bold text-ink-900">{topic.title}</div>
-                                                    <div className="text-sm text-ink-500 mt-1 max-w-sm truncate">{topic.description}</div>
+                                                    <div className="text-sm font-bold text-slate-800">{topic.title}</div>
+                                                    <div className="text-sm text-slate-500 mt-1 max-w-sm truncate">{topic.description}</div>
                                                 </td>
                                                 <td className="px-6 py-4">
-                                                    <span className={`inline-flex items-center px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-widest border ${DIFFICULTY_COLORS[topic.difficulty] || 'bg-ink-100 text-ink-700 border-ink-200'}`}>
+                                                    <span className={`inline-flex items-center px-2.5 py-1 rounded-lg text-[10px] font-bold uppercase tracking-widest border ${DIFFICULTY_COLORS[topic.difficulty] || 'bg-slate-100 text-slate-700 border-slate-200'}`}>
                                                         {topic.difficulty}
                                                     </span>
                                                 </td>
@@ -184,8 +184,8 @@ export default function TopicManager() {
                                                         disabled={saving === topic.id}
                                                         onClick={() => toggleAvailability(topic)}
                                                         className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold transition-all duration-200 active:scale-95 border ${topic.is_vit_available
-                                                            ? 'bg-success-50 text-success-700 border-success-200/60 hover:bg-success-100'
-                                                            : 'bg-ink-50 text-ink-600 border-ink-200 shadow-sm hover:bg-ink-100'
+                                                            ? 'bg-emerald-50 text-emerald-700 border-emerald-200/60 hover:bg-emerald-100'
+                                                            : 'bg-slate-50 text-slate-600 border-slate-200 shadow-sm hover:bg-slate-100'
                                                             } ${saving === topic.id ? 'opacity-50 cursor-not-allowed' : 'cursor-pointer'}`}
                                                     >
                                                         {topic.is_vit_available

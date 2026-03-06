@@ -1,47 +1,8 @@
 @import "tailwindcss";
 
-@theme {
-  --color-brand-900: #0A0F1E;
-  --color-brand-800: #10162A;
-  --color-brand-700: #141A33;
-  --color-brand-600: #1A2242;
-  --color-brand-500: #202951;
-  --color-brand-400: #263366;
-  --color-brand-300: #2E3E7A;
-  --color-brand-200: #374A94;
-  --color-brand-100: #4258B3;
-  --color-brand-50: #4E6AD6;
-
-  --color-accent-500: #2563EB;
-  --color-accent-400: #3B82F6;
-  --color-accent-600: #1D4ED8;
-  --color-accent-100: #DBEAFE;
-  --color-accent-50: #EFF6FF;
-
-  --color-success-600: #16A34A;
-  --color-success-100: #DCFCE7;
-
-  --color-warning-600: #D97706;
-  --color-warning-100: #FEF3C7;
-
-  --color-error-600: #DC2626;
-  --color-error-100: #FEE2E2;
-
-  --color-ink-900: #0F172A;
-  --color-ink-700: #334155;
-  --color-ink-500: #64748B;
-  --color-ink-400: #94A3B8;
-  --color-ink-200: #E2E8F0;
-  --color-ink-100: #F1F5F9;
-  --color-ink-50: #F8FAFC;
-
-  --font-sans: 'IBM Plex Sans', system-ui, sans-serif;
-  --font-mono: 'IBM Plex Mono', monospace;
-}
-
 @layer base {
   html {
-    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -49,5 +10,5 @@
 }
 
 body {
-  @apply bg-ink-50 text-ink-900 font-sans;
+  @apply bg-[#F8FAFC] text-slate-800;
 }
