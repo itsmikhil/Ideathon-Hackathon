@@ -1,94 +1,267 @@
-# EduGap AI 📘✨
+<div align="center">
 
-**EduGap AI** is a comprehensive career-readiness and learning roadmap platform tailored for VIT (Vellore Institute of Technology) students and faculty. It aims to bridge the gap between static university curriculums and rapidly evolving industry trends using AI-driven insights and a collaborative community.
+<img src="https://img.shields.io/badge/EduGap_AI-VIT_Edition-0A1628?style=for-the-badge&labelColor=00D4FF&color=0A1628" alt="EduGap AI" />
 
-## 🚀 Features
+# EduGap AI
+
+**Bridging the gap between university curriculum and industry reality.**
+
+Built for VIT students and faculty. Career roadmaps, curated resources, and a collaborative community — all in one platform.
+
+[![React](https://img.shields.io/badge/React_19-0A1628?style=flat-square&logo=react&logoColor=00D4FF)](https://react.dev)
+[![Vite](https://img.shields.io/badge/Vite-0A1628?style=flat-square&logo=vite&logoColor=00D4FF)](https://vitejs.dev)
+[![Node.js](https://img.shields.io/badge/Node.js_v18+-0A1628?style=flat-square&logo=node.js&logoColor=00C896)](https://nodejs.org)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-0A1628?style=flat-square&logo=postgresql&logoColor=4D9FFF)](https://postgresql.org)
+[![License](https://img.shields.io/badge/License-MIT-0A1628?style=flat-square)](LICENSE)
+
+[Live Demo](#) · [Report Bug](https://github.com/itsmikhil/Ideathon-Hackathon/issues) · [Request Feature](https://github.com/itsmikhil/Ideathon-Hackathon/issues)
+
+</div>
+
+---
+
+## What is EduGap AI?
+
+VIT's curriculum is structured. Industry moves fast. EduGap AI sits between the two.
+
+It maps your VIT subjects to real career paths, surfaces what the industry actually expects you to know, and gives students a place to learn, ask, and grow — while giving teachers a platform to contribute and be recognized for it.
+
+---
+
+## Platform Workflow
+
+```
+┌──────────────────────────────────────────────────────────────────────┐
+│                         STUDENT JOURNEY                              │
+│                                                                      │
+│   Register / Login                                                   │
+│         │                                                            │
+│         ▼                                                            │
+│   Pick a Career Domain  (Backend, Data Science, DevOps, AI/ML...)    │
+│         │                                                            │
+│         ▼                                                            │
+│   Topic Roadmap Generated  (AI topics merged with VIT subjects)      │
+│         │                                                            │
+│         ├──── Topic available in VIT? ────► Syllabus + Active        │
+│         │              YES                   Teachers for that tag   │
+│         │                                                            │
+│         └──── Topic NOT in VIT? ─────────► Free Online Resources     │
+│                        NO                  + "I want this in VIT"    │
+│                                              demand checkbox         │
+│         │                                                            │
+│         ▼                                                            │
+│   Forum  ──►  Post doubts · Read teacher blogs · Upvote · Reply      │
+└──────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────┐
+│                         TEACHER JOURNEY                              │
+│                                                                      │
+│   Login                                                              │
+│         │                                                            │
+│         ▼                                                            │
+│   Dashboard  ──►  Write Blog Post  ──►  Published to Forum           │
+│         │                                       │                    │
+│         │                            Students comment & reply        │
+│         │                                       │                    │
+│         └──────────── Points Awarded ◄───────────┘                   │
+│                      +5 per blog published                           │
+│                      +1 per reply received                           │
+└──────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────┐
+│                          ADMIN JOURNEY                               │
+│                                                                      │
+│   Login                                                              │
+│         │                                                            │
+│         ▼                                                            │
+│   Dashboard                                                          │
+│         ├── Demand Signals      topics students voted to add to VIT  │
+│         ├── Teacher Leaderboard ranked by total contribution points  │
+│         ├── Domain Popularity   how many students per career path    │
+│         ├── Content Moderation  review and remove flagged posts      │
+│         └── Refresh Topics      regenerate topic list per domain     │
+└──────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────────────┐
+│                           DATA FLOW                                  │
+│                                                                      │
+│   Topic Generation                                                   │
+│         ├── Triggered on first student selection of a domain         │
+│         ├── Result saved to DB — served instantly for all others     │
+│         └── Merged with VIT VTOP subjects via fuzzy match            │
+│                                                                      │
+│   Points Engine                                                      │
+│         ├── Teacher publishes blog ──────────────────► +5 pts        │
+│         └── Any user replies to teacher's blog ──────► +1 pt         │
+└──────────────────────────────────────────────────────────────────────┘
+```
+
+---
+
+## Features
 
 ### 🎓 For Students
-- **Domain Selection:** Choose from various career paths, from Software Engineering to Data Science.
-- **Personalized Learning Roadmaps:** Discover core VIT curriculum subjects combined with cutting-edge AI-suggested courses.
-- **On-Demand Course Requests:** If an industry-relevant topic isn't taught at VIT, vote to request it and demonstrate student demand.
-- **AI Resource Finder:** Automatically generate the best free, high-quality online resources for any topic.
+
+| Feature | Description |
+|---|---|
+| **Domain Selection** | Pick a career path — Backend, Data Science, DevOps, AI/ML, and more |
+| **Personalized Roadmap** | Generated topics merged with your actual VIT curriculum subjects |
+| **On-Demand Course Requests** | Topic not taught at VIT? Vote to request it — admin sees the demand |
+| **Resource Finder** | Automatically surfaces the best free online resources for any topic |
 
 ### 👨‍🏫 For Teachers
-- **Publish Blogs:** Share knowledge, tutorials, and insights via markdown-supported blog posts.
-- **Earn Reputation:** Gain points and climb the Teacher Leaderboard based on community interaction and blog engagement.
-- **Engage with Students:** View the most active students and provide guidance directly.
 
-### 🛠 For Administrators
-- **Dynamic Dashboard:** Monitor student domain interests, teacher rankings, and real-time upvotes for on-demand topic requests.
-- **Curriculum Management:** Toggle the availability of VIT subjects for the current semester and review AI-suggested trends to officially integrate them into the curriculum.
-- **Content Moderation:** Review and moderate flagged forum posts and doubts to maintain a healthy community environment.
+| Feature | Description |
+|---|---|
+| **Publish Blogs** | Write markdown-supported tutorials, concept explanations, and insights |
+| **Earn Reputation** | Gain points for every blog post and community reply — climb the leaderboard |
+| **Student Engagement** | See which students are most active in your subject area and guide them directly |
+
+### 🛠️ For Administrators
+
+| Feature | Description |
+|---|---|
+| **Dynamic Dashboard** | Monitor domain interests, teacher rankings, and topic demand in real time |
+| **Curriculum Management** | Toggle VIT subject availability per semester, review industry trend signals |
+| **Content Moderation** | Review and remove flagged forum posts to keep the community healthy |
 
 ### 💬 Community Forum
-- **Student Doubts & Teacher Blogs:** A unified space where teachers publish insights and students ask questions.
-- **Interactive Discussions:** Upvote helpful answers, reply to threads, and build a collaborative learning ecosystem.
+
+- Teachers publish long-form blogs and tutorials
+- Students post doubt questions (Stack Overflow-style)
+- Subject-tag filtering so every post reaches the right audience
+- Upvotes and threaded replies on all posts
 
 ---
 
-## 💻 Tech Stack
+## Tech Stack
 
-- **Frontend:** React 19, Vite, React Router v7, Tailwind CSS v4, Lucide Icons, Framer Motion
-- **Backend:** Node.js, Express.js
-- **Database:** PostgreSQL (`pg`), SQLite (`better-sqlite3`)
-- **Authentication:** JSON Web Tokens (`jsonwebtoken`), `bcrypt` 
-- **AI Integration:** Google Generative AI (`@google/genai`)
+### Frontend
+
+| Tool | Version | Purpose |
+|---|---|---|
+| React | 19 | UI framework |
+| Vite | Latest | Build tool and dev server |
+| React Router | v7 | Client-side routing |
+| Tailwind CSS | v4 | Utility-first styling |
+| Framer Motion | Latest | Animations and transitions |
+| Lucide Icons | Latest | Icon system |
+
+### Backend
+
+| Tool | Version | Purpose |
+|---|---|---|
+| Node.js | v18+ | Runtime |
+| Express.js | Latest | REST API server |
+| PostgreSQL + `pg` | Latest | Primary database |
+| SQLite + `better-sqlite3` | Latest | Local / dev database |
+| `jsonwebtoken` | Latest | JWT authentication |
+| `bcrypt` | Latest | Password hashing |
 
 ---
 
-## ⚙️ Getting Started
+## Getting Started
 
 ### Prerequisites
-Make sure you have [Node.js](https://nodejs.org/) (v18+) and `npm` installed.
 
-### 1. Clone the repository
+- [Node.js](https://nodejs.org/) v18 or higher
+- `npm` v9 or higher
+
+Verify your setup:
+
+```bash
+node --version   # v18.x.x or higher
+npm --version    # 9.x.x or higher
+```
+
+### 1. Clone the Repository
+
 ```bash
 git clone https://github.com/itsmikhil/Ideathon-Hackathon.git
 cd edugap
 ```
 
-### 2. Install dependencies
+### 2. Install Dependencies
+
 ```bash
 npm install
 ```
 
-### 3. Environment Configuration
-Create a `.env` file in the root directory. Configure the Google Gemini API key:
+### 3. Configure Environment Variables
+
+Create a `.env` file in the root directory:
+
 ```env
-# AI
-GEMINI_API_KEY=your_google_gemini_api_key
+# ── AI ─────────────────────────────────────────
+GEMINI_API_KEY=your_google_gemini_api_key_here
+
+# ── Auth ───────────────────────────────────────
+SECRET_KEY=your_jwt_secret_here
+
+# ── Database ───────────────────────────────────
+DATABASE_URL=postgresql://user:password@localhost:5432/edugap
 ```
 
-### 4. Run the Development Server
+> **Never commit your `.env` file. It is already in `.gitignore`.**
+
+### 4. Start the Development Server
+
 ```bash
 npm run dev
 ```
-This command starts both the backend API server (`server.ts`) and the Vite frontend dev server at the same time. Open [http://localhost:5173](http://localhost:5173) in your browser.
+
+Starts both the Express backend and Vite frontend simultaneously.  
+Open [http://localhost:5173](http://localhost:5173) in your browser.
 
 ---
 
-## 📜 Scripts
+## Available Scripts
 
-- `npm run dev`: Starts the Node/Express server and the Vite development environment concurrently using `tsx`.
-- `npm run build`: Builds the React frontend for production.
-- `npm run preview`: Locally previews the production build.
-- `npm run lint`: Runs TypeScript type-checking without emitting files.
-
----
-
-## 🎨 Design System
-
-The platform features a clean, technical, and premium UI aesthetic (Design System v1.0), tailored with a structured semantic architecture.
-- Built on modern `Plus Jakarta Sans` typography.
-- Uses distinct semantic Tailwind v4 layers (`indigo`, `purple`, `slate`, `emerald`, `amber`, `rose`) to handle varying levels of priority, feedback, and engagement.
+| Command | What it does |
+|---|---|
+| `npm run dev` | Starts the Express backend and Vite frontend concurrently via `tsx` |
+| `npm run build` | Builds the React frontend for production |
+| `npm run preview` | Locally previews the production build |
+| `npm run lint` | Runs TypeScript type-checking without emitting files |
 
 ---
 
-## 🤝 Contributing
-Contributions, issues, and feature requests are welcome! Feel free to check the [issues page](https://github.com/itsmikhil/Ideathon-Hackathon/issues).
+## Design System
 
-1. Fork the Project
-2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the Branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+The UI follows a **technical-premium** aesthetic built on structured semantic layers.
+
+- **Typography:** `Plus Jakarta Sans` — clean, modern, legible at all sizes
+- **Color layers:** Semantic Tailwind v4 tokens — `indigo`, `purple`, `slate`, `emerald`, `amber`, `rose` — each with a defined role across priority, feedback, and engagement
+- **Motion:** Framer Motion for page transitions and micro-interactions
+- **Principle:** Every component earns its place. No decorative noise.
+
+---
+
+## Contributing
+
+Contributions, issues, and feature requests are welcome.
+
+```bash
+# 1. Fork the repository
+
+# 2. Create your feature branch
+git checkout -b feature/your-feature-name
+
+# 3. Commit your changes
+git commit -m "feat: add your feature description"
+
+# 4. Push to your branch
+git push origin feature/your-feature-name
+
+# 5. Open a Pull Request on GitHub
+```
+
+Check the [open issues](https://github.com/itsmikhil/Ideathon-Hackathon/issues) before starting — your idea might already be tracked.
+
+---
+
+<div align="center">
+
+Built for VIT · VIT Internal Use Only
+
+</div>
